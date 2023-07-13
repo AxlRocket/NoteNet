@@ -1,0 +1,17 @@
+﻿<Application x:Class="NoteNet.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NoteNet"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/NoteNet;component/UI/AppThemes/LightTheme.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Controls/Button.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Controls/ButtonCloseNote.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Controls/ScrollBars.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Controls/TextBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

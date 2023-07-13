@@ -1,0 +1,77 @@
+﻿<Window x:Class="NoteNet.Windows.AddNote"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NoteNet.Windows"
+        mc:Ignorable="d"
+        Title="AddNote"
+        WindowStyle="None" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent">
+    <Border CornerRadius="10" 
+            Background="{StaticResource ee}" 
+            BorderThickness="0" 
+            BorderBrush="{StaticResource d6}"
+            Margin="5,5,5,5">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="5" Direction="-90"
+                              RenderingBias="Quality" ShadowDepth="1" Opacity=".5"/>
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="50" MinHeight="50" Height="50"/>
+                <RowDefinition MaxHeight="32" MinHeight="32" Height="32"/>
+                <RowDefinition/>
+                <RowDefinition MaxHeight="24" MinHeight="24" Height="24"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Grid.Row="0" CornerRadius="5" Height="40" HorizontalAlignment="Left" Margin="6,0,0,0" Padding="0,0,0,0">
+                <Button Style="{StaticResource Button}" Height="40" BorderBrush="{x:Null}">
+                    <TextBlock Text="Ajouter"/>
+                </Button>
+            </Border>
+
+            <Border Grid.Column="2" Grid.Row="0" CornerRadius="5" Height="40" HorizontalAlignment="Right" Margin="0,0,6,0" Padding="0,0,0,0">
+                <Button Style="{StaticResource Button}" Height="40" BorderBrush="{x:Null}">
+                    <TextBlock Text="Annuler"/>
+                </Button>
+            </Border>
+
+            <TextBox Grid.ColumnSpan="2" Grid.Row="1" Margin="6,0,6,0" 
+                     FontSize="22" 
+                     Background="{StaticResource ee}" 
+                     BorderBrush="{StaticResource d6}"
+                     BorderThickness="0,0,0,2"
+                     FontWeight="DemiBold"
+                     SelectionBrush="{DynamicResource a2}" 
+                     CaretBrush="{StaticResource foregroundColor}"
+                     x:Name="title" MaxLength="32">
+            </TextBox>
+
+            <Border Grid.ColumnSpan="2" Grid.Row="2" Margin="6,6,6,0" Background="{StaticResource ee}" CornerRadius="10" BorderBrush="{StaticResource d6}" BorderThickness="1">
+                <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+                    <RichTextBox BorderThickness="0" FontSize="14" 
+                             Padding="0,4,0,0" Background="Transparent"
+                                 VerticalScrollBarVisibility="Auto"
+                                 CaretBrush="{StaticResource foregroundColor}"
+                                 SelectionBrush="{StaticResource a2}">
+                    </RichTextBox>
+                </ScrollViewer>
+            </Border>
+
+            <Border Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Bottom">
+                <TextBlock Text="Créée le : 13 Juil. 2023"
+                       VerticalAlignment="Bottom"
+                           Margin="6,0,6,4"/>
+            </Border>
+
+            
+
+        </Grid>
+    </Border>
+</Window>
