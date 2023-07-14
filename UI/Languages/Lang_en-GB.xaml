@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- MAIN WINDOW -->
+    <system:String x:Key="MainWindow.AddNote">Add note</system:String>
+
+    <!-- MAIN WINDOW TOOLTIPS -->
+    <system:String x:Key="MainWindow.Options">Options</system:String>
+    <system:String x:Key="MainWindow.Collapse">Collapse NoteNet</system:String>
+
+    <!-- ADDNOTE WINDOW -->
+    <system:String x:Key="AddNoteWindow.Add">Add</system:String>
+    <system:String x:Key="AddNoteWindow.Cancel">Cancel</system:String>
+    <system:String x:Key="AddNoteWindow.Title">Title</system:String>
+    <system:String x:Key="AddNoteWindow.Created">Created on :&#160;</system:String>
+
+    <!-- MESSAGE -->
+    <system:String x:Key="Message.Warning">Warning</system:String>
+    <system:String x:Key="Message.Leave">You are about to leave an unsaved note. Are you sure you want to close ?</system:String>
+    <system:String x:Key="Message.EmptyTitle">Impossible to create a note without a title. Please enter one</system:String>
+    <system:String x:Key="Message.OkButton">OK</system:String>
+    <system:String x:Key="Message.CancelButton">Cancel</system:String>
+    
+
+</ResourceDictionary>

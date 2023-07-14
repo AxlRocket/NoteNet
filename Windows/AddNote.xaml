@@ -8,14 +8,15 @@
         Title="AddNote"
         WindowStyle="None" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         AllowsTransparency="True"
-        Background="Transparent">
+        Background="Transparent"
+        Loaded="Window_Loaded">
     <Border CornerRadius="10" 
-            Background="{StaticResource ee}" 
+            Background="{DynamicResource ee}" 
             BorderThickness="0" 
-            BorderBrush="{StaticResource d6}"
+            BorderBrush="{DynamicResource d6}"
             Margin="5,5,5,5">
         <Border.Effect>
-            <DropShadowEffect BlurRadius="5" Direction="-90"
+            <DropShadowEffect Color="{DynamicResource Shadow}" BlurRadius="5" Direction="-90"
                               RenderingBias="Quality" ShadowDepth="1" Opacity=".5"/>
         </Border.Effect>
         <Grid>
@@ -31,43 +32,53 @@
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0" Grid.Row="0" CornerRadius="5" Height="40" HorizontalAlignment="Left" Margin="6,0,0,0" Padding="0,0,0,0">
-                <Button Style="{StaticResource Button}" Height="40" BorderBrush="{x:Null}">
-                    <TextBlock Text="Ajouter"/>
+                <Button Style="{DynamicResource Button}" 
+                        Height="40" BorderBrush="{x:Null}"
+                        Click="Add_Click">
+                    <TextBlock Text="{DynamicResource AddNoteWindow.Add}"/>
                 </Button>
             </Border>
 
             <Border Grid.Column="2" Grid.Row="0" CornerRadius="5" Height="40" HorizontalAlignment="Right" Margin="0,0,6,0" Padding="0,0,0,0">
-                <Button Style="{StaticResource Button}" Height="40" BorderBrush="{x:Null}">
-                    <TextBlock Text="Annuler"/>
+                <Button Style="{DynamicResource Button}" 
+                        Height="40" BorderBrush="{x:Null}"
+                        Click="Cancel_Click">
+                    <TextBlock Text="{DynamicResource AddNoteWindow.Cancel}"/>
                 </Button>
             </Border>
 
             <TextBox Grid.ColumnSpan="2" Grid.Row="1" Margin="6,0,6,0" 
                      FontSize="22" 
-                     Background="{StaticResource ee}" 
-                     BorderBrush="{StaticResource d6}"
+                     Background="{DynamicResource ee}" 
+                     BorderBrush="{DynamicResource d6}"
                      BorderThickness="0,0,0,2"
                      FontWeight="DemiBold"
                      SelectionBrush="{DynamicResource a2}" 
-                     CaretBrush="{StaticResource foregroundColor}"
-                     x:Name="title" MaxLength="32">
+                     CaretBrush="{DynamicResource foregroundColor}"
+                     x:Name="Title" MaxLength="32" 
+                     GotFocus="Title_GotFocus" LostFocus="Title_LostFocus"
+                     Text="{DynamicResource AddNoteWindow.Title}" FontStyle="Italic" Opacity=".25">
             </TextBox>
 
-            <Border Grid.ColumnSpan="2" Grid.Row="2" Margin="6,6,6,0" Background="{StaticResource ee}" CornerRadius="10" BorderBrush="{StaticResource d6}" BorderThickness="1">
+            <Border Grid.ColumnSpan="2" Grid.Row="2" Margin="6,6,6,0" Background="{DynamicResource ee}" CornerRadius="10" BorderBrush="{DynamicResource d6}" BorderThickness="1">
                 <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
                     <RichTextBox BorderThickness="0" FontSize="14" 
                              Padding="0,4,0,0" Background="Transparent"
                                  VerticalScrollBarVisibility="Auto"
-                                 CaretBrush="{StaticResource foregroundColor}"
-                                 SelectionBrush="{StaticResource a2}">
+                                 CaretBrush="{DynamicResource foregroundColor}"
+                                 SelectionBrush="{DynamicResource a2}"
+                                 x:Name="Content"
+                                 Foreground="{DynamicResource foregroundColor}">
                     </RichTextBox>
                 </ScrollViewer>
             </Border>
 
             <Border Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Bottom">
-                <TextBlock Text="Créée le : 13 Juil. 2023"
-                       VerticalAlignment="Bottom"
-                           Margin="6,0,6,4"/>
+                <TextBlock Text=""
+                           VerticalAlignment="Bottom"
+                           Margin="6,0,6,4"
+                           x:Name="Created"
+                           Foreground="{DynamicResource foregroundColor}"/>
             </Border>
 
             

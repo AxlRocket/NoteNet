@@ -3,8 +3,8 @@
 
     <Style TargetType="{x:Type Button}" x:Key="Button">
 
-        <Setter Property="Background" Value="{StaticResource ee}"/>
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="{DynamicResource ee}"/>
+        <Setter Property="Foreground" Value="{DynamicResource foregroundColor}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -30,10 +30,10 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource f7}"/>
+                <Setter Property="Background" Value="{DynamicResource f7}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="{StaticResource fb}"/>
+                <Setter Property="Background" Value="{DynamicResource fb}"/>
             </Trigger>
         </Style.Triggers>
 

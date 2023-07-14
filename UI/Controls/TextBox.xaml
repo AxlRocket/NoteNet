@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="TextBox">
+        <Setter Property="Foreground" Value="{DynamicResource foregroundColor}"/>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
@@ -19,13 +21,13 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="BorderBrush" 
 								TargetName="Border" 
-								Value="{StaticResource a2}">
+								Value="{DynamicResource a2}">
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsFocused" Value="true">
                             <Setter Property="BorderBrush" 
 								TargetName="Border" 
-								Value="{StaticResource a2}">
+								Value="{DynamicResource a2}">
                             </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>

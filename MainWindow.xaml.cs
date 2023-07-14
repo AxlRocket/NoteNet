@@ -1,19 +1,7 @@
-﻿using NoteNet.Windows;
+﻿using NoteNet.UI.Languages;
+using NoteNet.Windows;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace NoteNet
 {
@@ -25,6 +13,8 @@ namespace NoteNet
         public MainWindow()
         {
             InitializeComponent();
+
+            Lang.SetLanguage();
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -74,7 +64,9 @@ namespace NoteNet
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddNote AN = new AddNote(this.Width - 50, this.Height - 50, this.Left, this.Top);
+            AddNote AN = new AddNote(this.Width - 50, this.Height - 50, this.Left, this.Top, "Titre test", "HelloWorld!");
+            AN.ShowInTaskbar = false;
+            AN.Owner = this;
             AN.ShowDialog();
         }
     }
