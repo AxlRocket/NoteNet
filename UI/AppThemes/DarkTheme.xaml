@@ -1,16 +1,32 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="f3" Color="#ff0000"/>
-    <SolidColorBrush x:Key="f7" Color="#292929"/>
-    <SolidColorBrush x:Key="fb" Color="#252525"/>
-    <SolidColorBrush x:Key="e7" Color="#0000ff"/>
-    <SolidColorBrush x:Key="ee" Color="#1C1C1C"/>
-    <SolidColorBrush x:Key="d6" Color="#4d4d4d"/>
-    <SolidColorBrush x:Key="a2" Color="#4f4f4f"/>
+    <SolidColorBrush x:Key="Background" Color="#1C1C1C"/>
 
-    <SolidColorBrush x:Key="foregroundColor" Color="#ffffff"/>
+    <!-- BUTTONS -->
+    <SolidColorBrush x:Key="BackgroundButton" Color="#1C1C1C"/>
+    <SolidColorBrush x:Key="BackgroundButtonHover" Color="#292929"/>
+    <SolidColorBrush x:Key="BackgroundButtonClick" Color="#252525"/>
 
-    <Color x:Key="Shadow">#aaaaaa</Color>
+    <!-- NOTES -->
+    <SolidColorBrush x:Key="BackgroundButtonNote" Color="#373737"/>
+    <SolidColorBrush x:Key="BackgroundButtonNoteHover" Color="#3C3C3C"/>
+    <SolidColorBrush x:Key="BackgroundButtonNoteClick" Color="#323232"/>
+    <SolidColorBrush x:Key="BackgroundNoteZone" Color="#242424"/>
+    <SolidColorBrush x:Key="BackgroundNoteTitle" Color="#373737"/>
+
+    <!-- SCROLLBAR -->
+    <SolidColorBrush x:Key="ScrollBarColor" Color="#9F9F9F"/>
+
+    <!-- FOREGROUND -->
+    <SolidColorBrush x:Key="ForegroundColor" Color="#E0E0E0"/>
+
+    <!-- SHADOW -->
+    <Color x:Key="Shadow">#E0E0E0</Color>
+
+    <!-- TEXT -->
+    <SolidColorBrush x:Key="SelectionText" Color="#8A8A8A"/>
+    <SolidColorBrush x:Key="BorderAddNote" Color="#373737"/>
+    <SolidColorBrush x:Key="Border" Color="#373737"/>
 
 </ResourceDictionary>

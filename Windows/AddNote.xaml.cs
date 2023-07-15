@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -98,8 +99,23 @@ namespace NoteNet.Windows
             {
                 Title.Text = (string)Application.Current.Resources["AddNoteWindow.Title"];
                 Title.FontStyle = FontStyles.Italic;
-                Title.Opacity = .25;
+                Title.Opacity = .35;
             }
+        }
+
+        private void Title_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text == "\"" ||
+                e.Text == "\\" ||
+                e.Text == "/" ||
+                e.Text == "?" ||
+                e.Text == ":" ||
+                e.Text == "*" ||
+                e.Text == "<" ||
+                e.Text == ">" ||
+                e.Text == "|")
+                e.Handled = true;
+            base.OnPreviewTextInput(e);
         }
     }
 }

@@ -1,7 +1,11 @@
-﻿using NoteNet.UI.Languages;
+﻿using NoteNet.UI.AppThemes;
+using NoteNet.UI.Controls;
+using NoteNet.UI.Languages;
 using NoteNet.Windows;
 using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace NoteNet
 {
@@ -15,6 +19,7 @@ namespace NoteNet
             InitializeComponent();
 
             Lang.SetLanguage();
+            Theme.SetTheme();
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -44,27 +49,41 @@ namespace NoteNet
             this.MaxHeight = height * heightRatio;
             this.MinHeight = height * heightRatio;
             this.Height = height * heightRatio;
+
+            // TEST
+
+            Note nte = new Note{
+                Title = "Courses",
+                Content = "Lait, oeufs, etc"
+            };
+
+            nte.MouseDown += DeleteNote;
+            nte.Click += ModifyNote;
+
+            FirstCol.Children.Add(nte);
         }
 
-        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            /*Console.WriteLine("Height : " + this.Height);
-            Console.WriteLine("Width : " + this.Width);
-            Console.WriteLine("Top : " + this.Top);
-            Console.WriteLine("Left : " + this.Left);*/
-        }
-
-        private void Main_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            Console.WriteLine("Height : " + this.Height);
-            Console.WriteLine("Width : " + this.Width);
-            Console.WriteLine("Top : " + this.Top);
-            Console.WriteLine("Left : " + this.Left);
-        }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddNote AN = new AddNote(this.Width - 50, this.Height - 50, this.Left, this.Top, "Titre test", "HelloWorld!");
+            AddNote AN = new AddNote(this.Width - 50, this.Height - 50, this.Left, this.Top); //, "Titre test", "HelloWorld!"
+            AN.ShowInTaskbar = false;
+            AN.Owner = this;
+            AN.ShowDialog();
+        }
+
+        private void DeleteNote(object sender, MouseButtonEventArgs e)
+        {
+            if (e.RightButton == MouseButtonState.Pressed)
+                Console.WriteLine("Delete");
+        }
+
+        private void ModifyNote(object sender, RoutedEventArgs e)
+        {
+            Note nte = (Note)sender;
+
+            AddNote AN = new AddNote(this.Width - 50, this.Height - 50, this.Left, this.Top, nte.Title, nte.Content); //, "Titre test", "HelloWorld!"
             AN.ShowInTaskbar = false;
             AN.Owner = this;
             AN.ShowDialog();
