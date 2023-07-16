@@ -1,7 +1,6 @@
 ﻿using NoteNet.Properties;
 using System;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -13,19 +12,19 @@ namespace NoteNet.Windows
     /// </summary>
     public partial class AddNote : Window
     {
-        public AddNote(double width = 0, double height = 0, double left = 0, double top = 0, string path = "")
+        public AddNote(Window parent, double width = 0, double height = 0, double left = 0, double top = 0, string path = "")
         {
-            this.Width = width;
-            this.MinWidth = width;
-            this.MaxWidth = width;
-            this.Height = height;
-            this.MinHeight = height;
-            this.MaxHeight = height;
-            this.Left = left + 25;
-            this.Top = top + 25;
             InitializeComponent();
 
-            Console.WriteLine(Path.Combine(Settings.Default.DefaultFolder, path + ".nte"));
+            Owner = parent;
+            Width = width;
+            MinWidth = width;
+            MaxWidth = width;
+            Height = height;
+            MinHeight = height;
+            MaxHeight = height;
+            Left = left + 25;
+            Top = top + 25;
 
             if (path != "")
             {
@@ -39,6 +38,11 @@ namespace NoteNet.Windows
             {
                 Created.Text = DateTime.Now.ToString("dd MMM yyyy");
             }
+        }
+
+        public string FullName
+        {
+            get { return Created.Text + "-" + Title.Text + ".nte"; }
         }
 
         private bool ContentInRTB()
@@ -63,10 +67,14 @@ namespace NoteNet.Windows
             {
                 //Ask user if he wants to leave
                 if (Message.Show(this, "Leave"))
+                {
+                    this.DialogResult = false;
                     this.Close();
+                }
             } 
             else
             {
+                this.DialogResult = false;
                 this.Close();
             }
         }
@@ -75,19 +83,21 @@ namespace NoteNet.Windows
         {
             if (Title.Text != (string)Application.Current.Resources["AddNoteWindow.Title"] && Title.Text != "" && Title.Text.Trim() != "")
             {
-                string path = Path.Combine(Settings.Default.DefaultFolder, Created.Text + "-" + Title.Text + ".nte");
+                string path = System.IO.Path.Combine(Settings.Default.DefaultFolder, Created.Text + "-" + Title.Text + ".nte");
 
                 if (File.Exists(path))
                 {
                     if (Message.Show(this, "AlreadyExists", false))
                     {
                         SaveNote(path);
+                        this.DialogResult = true;
                         this.Close();
                     }
                 }
                 else
                 {
                     SaveNote(path);
+                    this.DialogResult = true;
                     this.Close();
                 }                
             }

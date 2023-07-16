@@ -28,13 +28,15 @@
                                        Foreground="{DynamicResource ForegroundColor}"
                                        Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:Note}, Path=Title}"/>
 
+                            
+
                             <Border Grid.Row="1" 
                                         CornerRadius="0,0,10,10" 
                                         Padding="0,1,0,5" 
                                         Background="{DynamicResource BackgroundNoteZone}">
-                                <TextBlock TextWrapping="WrapWithOverflow" Margin="10,5,10,0"
-                                           Foreground="{DynamicResource ForegroundColor}"
-                                           Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:Note}, Path=Content}"/>
+                                <local:BindableRichTextBox Margin="10,5,10,0" Foreground="{DynamicResource ForegroundColor}" IsReadOnly="True"
+                                    Document="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:Note}, Path=rtbTest}"
+                                                           Background="Transparent" BorderThickness="0" Focusable="False" Cursor="Hand"/>
                             </Border>
                         </Grid>
 

@@ -71,7 +71,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="UI\AppThemes\Theme.cs" />
+    <Compile Include="UI\Controls\BindableRichTextBox.cs" />
     <Compile Include="UI\Controls\Note.cs" />
+    <Compile Include="UI\Controls\TilePanel.cs" />
     <Compile Include="UI\Languages\Lang.cs" />
     <Compile Include="Windows\AddNote.xaml.cs">
       <DependentUpon>AddNote.xaml</DependentUpon>

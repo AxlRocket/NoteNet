@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.IO;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace NoteNet.UI.Controls
@@ -9,6 +12,14 @@ namespace NoteNet.UI.Controls
         public Note()
         {
             //DefaultStyleKeyProperty.OverrideMetadata(typeof(Note), new FrameworkPropertyMetadata(typeof(Note)));
+            if (rtbTest != null)
+            {
+                Console.WriteLine("OK");
+            }
+            else
+            {
+                Console.WriteLine("null");
+            }
         }
 
         //TITLE
@@ -53,6 +64,18 @@ namespace NoteNet.UI.Controls
             set => SetValue(RTBProperty, value);
         }
 
+        // Test
 
+        public static readonly DependencyProperty rtbTestProperty =
+        DependencyProperty.Register(
+        "rtbTest", typeof(FlowDocument), typeof(Note),
+        new FrameworkPropertyMetadata(null,
+            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public FlowDocument rtbTest
+        {
+            get => (FlowDocument)GetValue(rtbTestProperty);
+            set => SetValue(rtbTestProperty, value);
+        }
     }
 }

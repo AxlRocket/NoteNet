@@ -5,13 +5,12 @@ using NoteNet.UI.Languages;
 using NoteNet.Windows;
 using System;
 using System.IO;
-using System.IO.Pipes;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Markup;
 
 namespace NoteNet
 {
@@ -87,29 +86,33 @@ namespace NoteNet
             }
         }
 
-        void LoadNote(string _fileName)
+        private FlowDocument LoadNote(string _fileName)
         {
-            string str = string.Empty;
+            FlowDocument FD;
+            TextRange tr;
             FileStream fStream;
             if (File.Exists(_fileName))
             {
+                FD = new FlowDocument();
+                tr = new TextRange(FD.ContentStart, FD.ContentEnd);
                 fStream = new FileStream(_fileName, FileMode.OpenOrCreate);
-                str = new StreamReader(fStream).ReadToEnd();
+                tr.Load(fStream, DataFormats.XamlPackage);
                 fStream.Close();
+                return FD;
             }
 
-            Console.WriteLine(str);
+            return null;
+
         }
 
         private void CreateNote(string path)
         {
-            LoadNote(path);
-
             Note nte = new Note
             {
                 Width = Width / 2 - 30,
                 Margin = new Thickness(10, 0, 0, 10),
                 Title = path.Remove(path.Length - 4).Split('-')[1],
+                rtbTest = LoadNote(path),
                 Date = path.Split('-')[0]
             };
 
@@ -186,33 +189,19 @@ namespace NoteNet
             Console.WriteLine("Dupliquer : " + (CM.PlacementTarget as Note).Title);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NewNote_Click(object sender, RoutedEventArgs e)
         {
-            AddNote AN = new AddNote(this.Width - 50, this.Height - 50, this.Left, this.Top); //, "Titre test", "HelloWorld!"
-            AN.ShowInTaskbar = false;
-            AN.Owner = this;
-            AN.ShowDialog();
+            AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top);
+
+            if (AddNte.ShowDialog() == true)
+            {
+                CreateNote(Path.Combine(Settings.Default.DefaultFolder, AddNte.FullName));
+            }
         }
 
         private void AddNoteToPanel(Note nte)
         {
-            WPanel.Children.Insert(0, nte);
-
-            /*if (FirstCol.ActualHeight > SecCol.ActualHeight)
-            {
-                SecCol.Children.Insert(0, nte);
-                return Task.CompletedTask;
-            }
-            else if (FirstCol.ActualHeight < SecCol.ActualHeight)
-            {
-                FirstCol.Children.Insert(0, nte);
-                return Task.CompletedTask;
-            }
-            else
-            {
-                FirstCol.Children.Insert(0, nte);
-                return Task.CompletedTask;
-            }*/
+            NoteContainer.Children.Insert(0, nte);
         }
 
         private void OpenNote(object sender, RoutedEventArgs e)
@@ -220,7 +209,7 @@ namespace NoteNet
             Note nte = (Note)sender;
             Console.WriteLine(nte.Title);
 
-            AddNote AN = new AddNote(this.Width - 50, this.Height - 50, this.Left, this.Top, nte.Date + "-" + nte.Title); //, "Titre test", "HelloWorld!"
+            AddNote AN = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, nte.Date + "-" + nte.Title); //, "Titre test", "HelloWorld!"
             AN.ShowInTaskbar = false;
             AN.Owner = this;
             AN.ShowDialog();
