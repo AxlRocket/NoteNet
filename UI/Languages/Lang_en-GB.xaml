@@ -10,13 +10,16 @@
     <system:String x:Key="MainWindow.Collapse">Collapse NoteNet</system:String>
 
     <!-- ADDNOTE WINDOW -->
-    <system:String x:Key="AddNoteWindow.Add">Add</system:String>
+    <system:String x:Key="AddNoteWindow.Save">Done</system:String>
     <system:String x:Key="AddNoteWindow.Cancel">Cancel</system:String>
     <system:String x:Key="AddNoteWindow.Title">Title</system:String>
     <system:String x:Key="AddNoteWindow.Created">Created on :&#160;</system:String>
 
     <!-- MESSAGE -->
     <system:String x:Key="Message.Warning">Warning</system:String>
+    <system:String x:Key="Message.Thanks">Thanks</system:String>
+    <system:String x:Key="Message.ThanksMessage">Thank you for downloading. I hope you like the soft</system:String>
+    <system:String x:Key="Message.AlreadyExists">A note with the same title already exists. Would you like to overwrite it ?</system:String>
     <system:String x:Key="Message.Leave">You are about to leave an unsaved note. Are you sure you want to close ?</system:String>
     <system:String x:Key="Message.EmptyTitle">Impossible to create a note without a title. Please enter one</system:String>
     <system:String x:Key="Message.OkButton">OK</system:String>

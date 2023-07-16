@@ -10,13 +10,16 @@
     <system:String x:Key="MainWindow.Collapse">Réduire NoteNet</system:String>
 
     <!-- ADDNOTE WINDOW -->
-    <system:String x:Key="AddNoteWindow.Add">Ajouter</system:String>
+    <system:String x:Key="AddNoteWindow.Save">Terminer</system:String>
     <system:String x:Key="AddNoteWindow.Cancel">Annuler</system:String>
     <system:String x:Key="AddNoteWindow.Title">Titre</system:String>
     <system:String x:Key="AddNoteWindow.Created">Créée le :&#160;</system:String>
 
     <!-- MESSAGE -->
     <system:String x:Key="Message.Warning">Attention</system:String>
+    <system:String x:Key="Message.Thanks">Merci</system:String>
+    <system:String x:Key="Message.ThanksMessage">Merci d'avoir installé mon app. J'espère qu'elle vous plaira</system:String>
+    <system:String x:Key="Message.AlreadyExists">Une note portant le même titre existe déjà. Voulez-vous la remplacer ?</system:String>
     <system:String x:Key="Message.Leave">Vous êtes sur le point de laisser une note non sauvegardée. Êtes-vous sûr de vouloir fermer ?</system:String>
     <system:String x:Key="Message.EmptyTitle">Impossible de créer une note sans titre. Veuillez en saisir un</system:String>
     <system:String x:Key="Message.OkButton">OK</system:String>

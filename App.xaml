@@ -12,9 +12,12 @@
                 
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/Button.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/ButtonCloseNote.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Controls/ContextMenu.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Controls/MenuItem.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/Note.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/ScrollBars.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/TextBox.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Controls/ToolTip.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

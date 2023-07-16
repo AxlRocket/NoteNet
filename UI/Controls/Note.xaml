@@ -7,7 +7,7 @@
     <Style TargetType="{x:Type local:Note}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Background" Value="{DynamicResource BackgroundNoteTitle}"/>
 
-        <Setter Property="Margin" Value="0,0,5,5"/>
+        <Setter Property="Margin" Value="0,0,0,5"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Cursor" Value="Hand"/>
 
@@ -26,7 +26,6 @@
                             <TextBlock Grid.Row="0" Margin="10,0,0,0" 
                                        VerticalAlignment="Center"
                                        Foreground="{DynamicResource ForegroundColor}"
-                                       x:Name="NoteTitle"
                                        Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:Note}, Path=Title}"/>
 
                             <Border Grid.Row="1" 
@@ -35,7 +34,6 @@
                                         Background="{DynamicResource BackgroundNoteZone}">
                                 <TextBlock TextWrapping="WrapWithOverflow" Margin="10,5,10,0"
                                            Foreground="{DynamicResource ForegroundColor}"
-                                           x:Name="NoteContent"
                                            Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:Note}, Path=Content}"/>
                             </Border>
                         </Grid>

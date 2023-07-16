@@ -1,11 +1,17 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace NoteNet.UI.Controls
 {
     public class Note : Button
     {
-        // TITLE
+        public Note()
+        {
+            //DefaultStyleKeyProperty.OverrideMetadata(typeof(Note), new FrameworkPropertyMetadata(typeof(Note)));
+        }
+
+        //TITLE
 
         public static readonly DependencyProperty TitleProperty =
         DependencyProperty.Register(
@@ -21,20 +27,32 @@ namespace NoteNet.UI.Controls
 
         // CONTENT
 
-        public static readonly DependencyProperty ContentProperty =
+        public static readonly DependencyProperty RTBProperty =
         DependencyProperty.Register(
-        "Content", typeof(string), typeof(Note),
+        "RTB", typeof(string), typeof(Note),
         new FrameworkPropertyMetadata(null,
             FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-        public string Content
+        public string RTB
         {
-            get => (string)GetValue(ContentProperty);
-            set => SetValue(ContentProperty, value);
+            get => (string)GetValue(RTBProperty);
+            set => SetValue(RTBProperty, value);
         }
-        static Note()
+
+        // DATE
+
+        public static readonly DependencyProperty DateProperty =
+        DependencyProperty.Register(
+        "Date", typeof(string), typeof(Note),
+        new FrameworkPropertyMetadata(null,
+            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public string Date
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Note), new FrameworkPropertyMetadata(typeof(Note)));
+            get => (string)GetValue(RTBProperty);
+            set => SetValue(RTBProperty, value);
         }
+
+
     }
 }

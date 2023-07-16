@@ -8,16 +8,15 @@
         Title="AddNote"
         WindowStyle="None" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         AllowsTransparency="True"
-        Background="Transparent"
-        Loaded="Window_Loaded">
+        Background="Transparent">
     <Border CornerRadius="10" 
             Background="{DynamicResource Background}" 
-            BorderThickness="0" 
-            BorderBrush="{DynamicResource BorderAddNote}"
-            Margin="5,5,5,5">
+            BorderThickness="1" 
+            BorderBrush="{DynamicResource BorderColor}"
+            Margin="10">
         <Border.Effect>
-            <DropShadowEffect Color="{DynamicResource Shadow}" BlurRadius="5" Direction="-90"
-                              RenderingBias="Quality" ShadowDepth="1" Opacity=".5"/>
+            <DropShadowEffect Color="{DynamicResource Shadow}" BlurRadius="15" Direction="-90"
+                              RenderingBias="Quality"  ShadowDepth="2" Opacity=".4"/>
         </Border.Effect>
         <Grid>
             <Grid.RowDefinitions>
@@ -35,7 +34,7 @@
                 <Button Style="{DynamicResource Button}" 
                         Height="40" BorderBrush="{x:Null}"
                         Click="Add_Click">
-                    <TextBlock Text="{DynamicResource AddNoteWindow.Add}"/>
+                    <TextBlock Text="{DynamicResource AddNoteWindow.Save}"/>
                 </Button>
             </Border>
 
@@ -75,11 +74,17 @@
             </Border>
 
             <Border Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Bottom">
-                <TextBlock Text=""
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource AddNoteWindow.Created}"
                            VerticalAlignment="Bottom"
-                           Margin="6,0,6,4"
+                           Margin="6,0,0,4"
+                           Foreground="{DynamicResource ForegroundColor}"/>
+                    <TextBlock VerticalAlignment="Bottom"
+                           Margin="0,0,0,4"
                            x:Name="Created"
                            Foreground="{DynamicResource ForegroundColor}"/>
+                </StackPanel>
+                
             </Border>
 
             

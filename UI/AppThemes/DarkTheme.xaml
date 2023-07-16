@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="Background" Color="#1C1C1C"/>
+    <SolidColorBrush x:Key="BorderColor" Color="#515151"/>
 
     <!-- BUTTONS -->
     <SolidColorBrush x:Key="BackgroundButton" Color="#1C1C1C"/>
@@ -22,11 +23,21 @@
     <SolidColorBrush x:Key="ForegroundColor" Color="#E0E0E0"/>
 
     <!-- SHADOW -->
-    <Color x:Key="Shadow">#E0E0E0</Color>
+    <Color x:Key="Shadow">#000000</Color>
 
     <!-- TEXT -->
-    <SolidColorBrush x:Key="SelectionText" Color="#8A8A8A"/>
+    <SolidColorBrush x:Key="SelectionText" Color="#464646"/>
     <SolidColorBrush x:Key="BorderAddNote" Color="#373737"/>
     <SolidColorBrush x:Key="Border" Color="#373737"/>
+
+    <!-- CONTEXT MENU -->
+    <SolidColorBrush x:Key="ContextMenuBackground" Color="#2C2C2C"/>
+    <SolidColorBrush x:Key="ContextMenuBorder" Color="#3B3B3B"/>
+    <SolidColorBrush x:Key="ContextMenuHover" Color="#383838"/>
+    <SolidColorBrush x:Key="ContextMenuClick" Color="#343434"/>
+
+    <!-- TOOLTIP -->
+    <SolidColorBrush x:Key="ToolTipBackground" Color="#2C2C2C"/>
+    <SolidColorBrush x:Key="ToolTipBorder" Color="#1A1A1A"/>
 
 </ResourceDictionary>

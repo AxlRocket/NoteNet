@@ -12,19 +12,12 @@ namespace NoteNet.Windows
             InitializeComponent();
         }
 
-        public static bool Show(Window parent, string message, bool caution = false, string title = "")
+        public static bool Show(Window parent, string message, bool caution = false, string title = "Warning")
         {
             Message msgBox = new Message();
             msgBox.Owner = parent;
 
-            if (title != "")
-            {
-                msgBox.Title.Text = title;
-            }
-            else
-            {
-                msgBox.Title.Text = (string)Application.Current.Resources["Message.Warning"];
-            }
+            msgBox.Title.Text = (string)Application.Current.Resources["Message." + title];
 
             msgBox.MessageText.Text = (string)Application.Current.Resources["Message." + message];
 
