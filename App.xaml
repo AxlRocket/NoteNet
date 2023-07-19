@@ -1,7 +1,6 @@
 ﻿<Application x:Class="NoteNet.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:NoteNet"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -9,9 +8,11 @@
                 <ResourceDictionary Source="/NoteNet;component/UI/Languages/Lang_en-GB.xaml"/>
                 
                 <ResourceDictionary Source="/NoteNet;component/UI/AppThemes/LightTheme.xaml"/>
-                
+
+                <ResourceDictionary Source="/NoteNet;component/UI/Icons/Arrow.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Icons/Options.xaml"/>
+
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/Button.xaml"/>
-                <ResourceDictionary Source="/NoteNet;component/UI/Controls/ButtonCloseNote.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/ContextMenu.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/MenuItem.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/Note.xaml"/>

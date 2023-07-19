@@ -12,6 +12,10 @@ namespace NoteNet.Windows
     /// </summary>
     public partial class AddNote : Window
     {
+        private string CreationDate;
+
+        private bool Modification;
+
         public AddNote(Window parent, double width = 0, double height = 0, double left = 0, double top = 0, string path = "")
         {
             InitializeComponent();
@@ -28,21 +32,82 @@ namespace NoteNet.Windows
 
             if (path != "")
             {
-                Created.Text = path.Split('-')[0];
-                Title.Text = path.Split('-')[1];
+                Modification = true;
+                CreationDate = path.Split('-')[0]; //
+                Created.Text = DateFormat(path.Split('-')[0]); //path.Split('-')[0].Remove(path.Split('-')[0].Count() - 4); // Donne juste la date
+                Title.Text = path.Split('-')[1]; // Donne le titre
                 Title.FontStyle = FontStyles.Normal;
                 Title.Opacity = 1;
                 LoadNote(Path.Combine(Settings.Default.DefaultFolder, path + ".nte"));
             }
             else
             {
+                Modification = false;
+                CreationDate = DateTime.Now.ToString("ddMMyyyyhhmm");
                 Created.Text = DateTime.Now.ToString("dd MMM yyyy");
             }
         }
 
         public string FullName
         {
-            get { return Created.Text + "-" + Title.Text + ".nte"; }
+            get { return CreationDate + "-" + Title.Text + ".nte"; }
+        }
+
+        public string NewTitle
+        {
+            get { return Title.Text; }
+        }
+
+        private string DateFormat(string date)
+        {
+            string day = date[0].ToString() + date[1].ToString(), 
+                month = date[2].ToString() + date[3].ToString(), 
+                year = date[4].ToString() + date[5].ToString() + date[6].ToString() + date[7].ToString();
+
+            switch (month)
+            {
+                case "01":
+                    month = (string)Application.Current.Resources["Month.January"];
+                    break;
+                case "02":
+                    month = (string)Application.Current.Resources["Month.February"];
+                    break;
+                case "03":
+                    month = (string)Application.Current.Resources["Month.March"];
+                    break;
+                case "04":
+                    month = (string)Application.Current.Resources["Month.April"];
+                    break;
+                case "05":
+                    month = (string)Application.Current.Resources["Month.May"];
+                    break;
+                case "06":
+                    month = (string)Application.Current.Resources["Month.June"];
+                    break;
+                case "07":
+                    month = (string)Application.Current.Resources["Month.July"];
+                    break;
+                case "08":
+                    month = (string)Application.Current.Resources["Month.August"];
+                    break;
+                case "09":
+                    month = (string)Application.Current.Resources["Month.September"];
+                    break;
+                case "10":
+                    month = (string)Application.Current.Resources["Month.October"];
+                    break;
+                case "11":
+                    month = (string)Application.Current.Resources["Month.November"];
+                    break;
+                case "12":
+                    month = (string)Application.Current.Resources["Month.December"];
+                    break;
+                default:
+                    month = (string)Application.Current.Resources["Month.January"]; ;
+                    break;
+            }
+
+            return day + " " + month + " " + year;
         }
 
         private bool ContentInRTB()
@@ -68,14 +133,14 @@ namespace NoteNet.Windows
                 //Ask user if he wants to leave
                 if (Message.Show(this, "Leave"))
                 {
-                    this.DialogResult = false;
-                    this.Close();
+                    DialogResult = false;
+                    Close();
                 }
             } 
             else
             {
-                this.DialogResult = false;
-                this.Close();
+                DialogResult = false;
+                Close();
             }
         }
 
@@ -83,22 +148,34 @@ namespace NoteNet.Windows
         {
             if (Title.Text != (string)Application.Current.Resources["AddNoteWindow.Title"] && Title.Text != "" && Title.Text.Trim() != "")
             {
-                string path = System.IO.Path.Combine(Settings.Default.DefaultFolder, Created.Text + "-" + Title.Text + ".nte");
+                string path = Path.Combine(Settings.Default.DefaultFolder, CreationDate + "-" + Title.Text + ".nte");
 
                 if (File.Exists(path))
                 {
-                    if (Message.Show(this, "AlreadyExists", false))
+                    if (Modification)
                     {
-                        SaveNote(path);
-                        this.DialogResult = true;
-                        this.Close();
+                        if (Message.Show(this, "SaveModification", false, "Information"))
+                        {
+                            SaveNote(path);
+                            DialogResult = true;
+                            Close();
+                        }
+                    }
+                    else
+                    {
+                        if (Message.Show(this, "AlreadyExists", false))
+                        {
+                            SaveNote(path);
+                            DialogResult = true;
+                            Close();
+                        }
                     }
                 }
                 else
                 {
                     SaveNote(path);
-                    this.DialogResult = true;
-                    this.Close();
+                    DialogResult = true;
+                    Close();
                 }                
             }
             else

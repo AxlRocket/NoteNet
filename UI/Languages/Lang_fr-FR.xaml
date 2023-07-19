@@ -9,6 +9,13 @@
     <system:String x:Key="MainWindow.Options">Options</system:String>
     <system:String x:Key="MainWindow.Collapse">Réduire NoteNet</system:String>
 
+    <!-- CONTEXT MENU -->
+    <system:String x:Key="ContextMenu.Modify">Modifier</system:String>
+    <system:String x:Key="ContextMenu.Delete">Supprimer</system:String>
+    <system:String x:Key="ContextMenu.Duplicate">Dupliquer</system:String>
+    <system:String x:Key="ContextMenu.Display">Afficher</system:String>
+    <system:String x:Key="ContextMenu.Close">Fermer NoteNet</system:String>
+
     <!-- ADDNOTE WINDOW -->
     <system:String x:Key="AddNoteWindow.Save">Terminer</system:String>
     <system:String x:Key="AddNoteWindow.Cancel">Annuler</system:String>
@@ -17,13 +24,29 @@
 
     <!-- MESSAGE -->
     <system:String x:Key="Message.Warning">Attention</system:String>
+    <system:String x:Key="Message.Information">Information</system:String>
     <system:String x:Key="Message.Thanks">Merci</system:String>
     <system:String x:Key="Message.ThanksMessage">Merci d'avoir installé mon app. J'espère qu'elle vous plaira</system:String>
+    <system:String x:Key="Message.SaveModification">Enregistrer les modifications ?</system:String>
     <system:String x:Key="Message.AlreadyExists">Une note portant le même titre existe déjà. Voulez-vous la remplacer ?</system:String>
     <system:String x:Key="Message.Leave">Vous êtes sur le point de laisser une note non sauvegardée. Êtes-vous sûr de vouloir fermer ?</system:String>
     <system:String x:Key="Message.EmptyTitle">Impossible de créer une note sans titre. Veuillez en saisir un</system:String>
     <system:String x:Key="Message.OkButton">OK</system:String>
     <system:String x:Key="Message.CancelButton">Annuler</system:String>
+
+    <!-- MONTHS -->
+    <system:String x:Key="Month.January">Jan.</system:String>
+    <system:String x:Key="Month.February">Fév.</system:String>
+    <system:String x:Key="Month.March">Mars</system:String>
+    <system:String x:Key="Month.April">Avr.</system:String>
+    <system:String x:Key="Month.May">Mai</system:String>
+    <system:String x:Key="Month.June">Juin</system:String>
+    <system:String x:Key="Month.July">Juil.</system:String>
+    <system:String x:Key="Month.August">Août</system:String>
+    <system:String x:Key="Month.September">Sept.</system:String>
+    <system:String x:Key="Month.October">Oct.</system:String>
+    <system:String x:Key="Month.November">Nov.</system:String>
+    <system:String x:Key="Month.December">Déc.</system:String>
 
 
 </ResourceDictionary>

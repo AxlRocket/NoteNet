@@ -70,5 +70,17 @@ namespace NoteNet.Properties {
                 this["DefaultFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Showbubble {
+            get {
+                return ((bool)(this["Showbubble"]));
+            }
+            set {
+                this["Showbubble"] = value;
+            }
+        }
     }
 }

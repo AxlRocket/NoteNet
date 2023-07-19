@@ -11,7 +11,6 @@ namespace NoteNet.UI.Controls
     {
         public Note()
         {
-            //DefaultStyleKeyProperty.OverrideMetadata(typeof(Note), new FrameworkPropertyMetadata(typeof(Note)));
             if (rtbTest != null)
             {
                 Console.WriteLine("OK");

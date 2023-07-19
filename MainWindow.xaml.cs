@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Markup;
 
 namespace NoteNet
 {
@@ -19,12 +18,34 @@ namespace NoteNet
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly Bubble bubble;
+
         public MainWindow()
         {
             InitializeComponent();
 
             Lang.SetLanguage();
             Theme.SetTheme();
+
+            new NotifyIcon();
+
+            if (Settings.Default.Showbubble)
+                bubble = new Bubble(this);
+        }
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                Hide();
+                bubble?.Show();
+            }
+            else
+            {
+                bubble?.Hide();
+            }
+                
+            base.OnStateChanged(e);
         }
 
         public bool IsDirectoryEmpty(string path)
@@ -86,6 +107,20 @@ namespace NoteNet
             }
         }
 
+        private void ButtonOptions_Click(object sender, RoutedEventArgs e)
+        {
+            Options opt = new Options(this, this.Width - 50, this.Height - 50, this.Left, this.Top);
+            opt.ShowInTaskbar = false;
+            opt.Owner = this;
+
+            opt.ShowDialog();
+        }
+
+        private void ReduceApp_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
         private FlowDocument LoadNote(string _fileName)
         {
             FlowDocument FD;
@@ -102,18 +137,19 @@ namespace NoteNet
             }
 
             return null;
-
         }
 
         private void CreateNote(string path)
         {
+            string NoteName = path.Split('\\')[path.Split('\\').Count() - 1];
+
             Note nte = new Note
             {
                 Width = Width / 2 - 30,
                 Margin = new Thickness(10, 0, 0, 10),
-                Title = path.Remove(path.Length - 4).Split('-')[1],
+                Title = NoteName.Remove(NoteName.Length - 4).Split('-')[1],
                 rtbTest = LoadNote(path),
-                Date = path.Split('-')[0]
+                Date = NoteName.Split('-')[0]
             };
 
             nte.Click += OpenNote;
@@ -126,13 +162,11 @@ namespace NoteNet
         {
             ContextMenu CM = new ContextMenu();
             MenuItem Mod = new MenuItem();
-            Mod.Header = "Modify";
+            Mod.Header = (string)Application.Current.Resources["ContextMenu.Modify"];
             MenuItem Del = new MenuItem();
-            Del.Header = "Delete";
-            MenuItem Shr = new MenuItem();
-            Shr.Header = "Share";
+            Del.Header = (string)Application.Current.Resources["ContextMenu.Delete"];
             MenuItem Dup = new MenuItem();
-            Dup.Header = "Duplicate";
+            Dup.Header = (string)Application.Current.Resources["ContextMenu.Duplicate"];
 
             Binding b = new Binding("Parent");
             b.RelativeSource = RelativeSource.Self;
@@ -143,15 +177,11 @@ namespace NoteNet
             Del.SetBinding(MenuItem.CommandParameterProperty, b);
             Del.Click += DeleteNote;
 
-            Shr.SetBinding(MenuItem.CommandParameterProperty, b);
-            Shr.Click += ShareNote;
-
             Dup.SetBinding(MenuItem.CommandParameterProperty, b);
             Dup.Click += DuplicateNote;
 
             CM.Items.Add(Mod);
             CM.Items.Add(Del);
-            CM.Items.Add(Shr);
             CM.Items.Add(Dup);
 
             return CM;
@@ -162,7 +192,7 @@ namespace NoteNet
             MenuItem mnu = sender as MenuItem;
             ContextMenu CM = mnu.Parent as ContextMenu;
 
-            Console.WriteLine("Modifier : " + (CM.PlacementTarget as Note).Title);
+            OpenNote(CM.PlacementTarget as Note, null);
         }
 
         private void DeleteNote(object sender, RoutedEventArgs e)
@@ -170,15 +200,12 @@ namespace NoteNet
             MenuItem mnu = sender as MenuItem;
             ContextMenu CM = mnu.Parent as ContextMenu;
 
-            Console.WriteLine("Supprimer : " + (CM.PlacementTarget as Note).Title);
-        }
+            if (File.Exists(Path.Combine(Settings.Default.DefaultFolder, (CM.PlacementTarget as Note).Date + "-" + (CM.PlacementTarget as Note).Title + ".nte")))
+            {
+                File.Delete(Path.Combine(Settings.Default.DefaultFolder, (CM.PlacementTarget as Note).Date + "-" + (CM.PlacementTarget as Note).Title + ".nte"));
+            }
 
-        private void ShareNote(object sender, RoutedEventArgs e)
-        {
-            MenuItem mnu = sender as MenuItem;
-            ContextMenu CM = mnu.Parent as ContextMenu;
-
-            Console.WriteLine("Partager : " + (CM.PlacementTarget as Note).Title);
+            NoteContainer.Children.Remove(CM.PlacementTarget as Note);
         }
 
         private void DuplicateNote(object sender, RoutedEventArgs e)
@@ -189,9 +216,16 @@ namespace NoteNet
             Console.WriteLine("Dupliquer : " + (CM.PlacementTarget as Note).Title);
         }
 
+        public void NewNoteFromBubble(object sender, RoutedEventArgs e)
+        {
+            NewNote_Click(sender, e);
+        }
+
         private void NewNote_Click(object sender, RoutedEventArgs e)
         {
             AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top);
+            AddNte.ShowInTaskbar = false;
+            AddNte.Owner = this;
 
             if (AddNte.ShowDialog() == true)
             {
@@ -201,18 +235,33 @@ namespace NoteNet
 
         private void AddNoteToPanel(Note nte)
         {
-            NoteContainer.Children.Insert(0, nte);
+            NoteContainer.Children.Add(nte);
         }
 
         private void OpenNote(object sender, RoutedEventArgs e)
         {
             Note nte = (Note)sender;
-            Console.WriteLine(nte.Title);
+            Console.WriteLine(nte.Date);
 
-            AddNote AN = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, nte.Date + "-" + nte.Title); //, "Titre test", "HelloWorld!"
-            AN.ShowInTaskbar = false;
-            AN.Owner = this;
-            AN.ShowDialog();
+            AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, nte.Date + "-" + nte.Title); //, "Titre test", "HelloWorld!"
+            AddNte.ShowInTaskbar = false;
+            AddNte.Owner = this;
+
+            if (AddNte.ShowDialog() == true)
+            {
+                RefreshNote(nte, AddNte.NewTitle);
+            }
+        }
+
+        private void RefreshNote(Note nte, string newTitle)
+        {
+            if (File.Exists(Path.Combine(Settings.Default.DefaultFolder, nte.Date + "-" + nte.Title + ".nte")) && nte.Title != newTitle)
+            {
+                File.Delete(Path.Combine(Settings.Default.DefaultFolder, nte.Date + "-" + nte.Title + ".nte"));
+            }
+
+            nte.Title = newTitle;
+            nte.rtbTest = LoadNote(Path.Combine(Settings.Default.DefaultFolder, nte.Date + "-" + newTitle + ".nte"));
         }
 
     }

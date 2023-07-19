@@ -8,9 +8,10 @@
         Title="MainWindow"
         x:Name="Main" WindowStyle="None" 
         WindowStartupLocation="Manual"
-        ResizeMode="NoResize"
         AllowsTransparency="True"
-        Background="Transparent" Loaded="Main_Loaded">
+        Background="Transparent" Loaded="Main_Loaded"
+        ShowInTaskbar="False" ResizeMode="NoResize" 
+        Icon="/UI/Icons/Icon.ico" Topmost="True">
     <Border CornerRadius="10" Background="{DynamicResource Background}"
             BorderThickness="1" 
             BorderBrush="{DynamicResource BorderColor}"
@@ -29,8 +30,8 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition MaxWidth="40" Width="40" MinWidth="40"/>
-                        <ColumnDefinition MaxWidth="40" Width="40" MinWidth="40"/>
+                        <ColumnDefinition MaxWidth="44" Width="44" MinWidth="44"/>
+                        <ColumnDefinition MaxWidth="44" Width="44" MinWidth="44"/>
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0" CornerRadius="5" Height="40" HorizontalAlignment="Left" Margin="6,0,0,0" Padding="0,0,0,0">
                         <Button Style="{DynamicResource Button}" Height="40" BorderBrush="{x:Null}" Click="NewNote_Click">
@@ -39,18 +40,21 @@
                     </Border>
                     <Border Grid.Column="1" CornerRadius="5" Height="40" HorizontalAlignment="Right" Margin="0,0,6,0">
                         <Button Style="{DynamicResource Button}" 
-                                Width="34" Height="40" 
+                                Width="38" Height="40"
+                                Margin="0,0,0,0"
                                 BorderBrush="{x:Null}"
-                                ToolTip="{DynamicResource MainWindow.Options}">
-                            <TextBlock Text="O"/>
+                                ToolTip="{DynamicResource MainWindow.Options}"
+                                Click="ButtonOptions_Click">
+                            <Image Height="20" Source="{DynamicResource OptionsImage}" Stretch="Uniform" Margin="0,0,0,0"/>
                         </Button>
                     </Border>
                     <Border Grid.Column="2" CornerRadius="5" Height="40" HorizontalAlignment="Right" Margin="0,0,6,0">
                         <Button Style="{DynamicResource Button}" 
-                                Width="34" Height="40" 
+                                Width="38" Height="40" 
                                 BorderBrush="{x:Null}"
-                                ToolTip="{DynamicResource MainWindow.Collapse}">
-                            <TextBlock Text=">"/>
+                                ToolTip="{DynamicResource MainWindow.Collapse}"
+                                Click="ReduceApp_Click">
+                            <Image Height="15" Source="{DynamicResource RightArrow}" Stretch="Uniform" Margin="0,0,0,0"/>
                         </Button>
                     </Border>
                 </Grid>
@@ -62,22 +66,12 @@
                               HorizontalScrollBarVisibility="Disabled"
                               Margin="0,0,0,10">
 
-                    <local:TilePanel x:Name="NoteContainer" Orientation="Vertical" VerticalAlignment="Top">
-                        
+                    <local:TilePanel x:Name="NoteContainer" 
+                                     Orientation="Vertical" 
+                                     VerticalAlignment="Top"
+                                     HorizontalAlignment="Left">
+
                     </local:TilePanel>
-                    
-                    <!--<Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Column="0" Margin="15,0,5,0" Background="Red" VerticalAlignment="Top" x:Name="FirstCol" >
-                        </StackPanel>
-
-                        <StackPanel Loaded="NoteContainer_Loaded" Grid.Column="1" Margin="5,0,0,0" Background="Blue" VerticalAlignment="Top" x:Name="SecCol">
-                        </StackPanel>
-                    </Grid>-->
                 </ScrollViewer>
                 
             </Border>

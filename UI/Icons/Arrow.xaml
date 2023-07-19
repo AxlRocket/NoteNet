@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DrawingImage x:Key="RightArrow">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                <DrawingGroup Opacity="1" Transform="0.1,0,0,-0.1,0,512">
+                    <GeometryDrawing Brush="{DynamicResource ForegroundColor}" Geometry="F1 M512,512z M0,0z M1206,5106C1160,5089 1107,5039 1085,4993 1061,4942 1064,4859 1092,4808 1108,4778 1470,4442 2320,3667 2983,3063 3525,2565 3525,2560 3525,2555 2983,2057 2320,1453 1470,678 1108,342 1092,312 1064,261 1061,178 1085,126 1109,76 1171,23 1222,10 1270,-3 1337,3 1378,24 1393,32 1992,573 2710,1227 3736,2162 4019,2426 4034,2457 4058,2511 4058,2609 4034,2663 4020,2694 3734,2960 2710,3892 1992,4547 1392,5089 1376,5097 1335,5118 1252,5123 1206,5106z" />
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+</ResourceDictionary>

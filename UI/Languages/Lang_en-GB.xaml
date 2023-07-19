@@ -9,6 +9,13 @@
     <system:String x:Key="MainWindow.Options">Options</system:String>
     <system:String x:Key="MainWindow.Collapse">Collapse NoteNet</system:String>
 
+    <!-- CONTEXT MENU -->
+    <system:String x:Key="ContextMenu.Modify">Modify</system:String>
+    <system:String x:Key="ContextMenu.Delete">Delete</system:String>
+    <system:String x:Key="ContextMenu.Duplicate">Duplicate</system:String>
+    <system:String x:Key="ContextMenu.Display">Display</system:String>
+    <system:String x:Key="ContextMenu.Close">Close NoteNet</system:String>
+
     <!-- ADDNOTE WINDOW -->
     <system:String x:Key="AddNoteWindow.Save">Done</system:String>
     <system:String x:Key="AddNoteWindow.Cancel">Cancel</system:String>
@@ -17,13 +24,30 @@
 
     <!-- MESSAGE -->
     <system:String x:Key="Message.Warning">Warning</system:String>
+    <system:String x:Key="Message.Information">Information</system:String>
     <system:String x:Key="Message.Thanks">Thanks</system:String>
     <system:String x:Key="Message.ThanksMessage">Thank you for downloading. I hope you like the soft</system:String>
+    <system:String x:Key="Message.SaveModification">Save changes ?</system:String>
     <system:String x:Key="Message.AlreadyExists">A note with the same title already exists. Would you like to overwrite it ?</system:String>
     <system:String x:Key="Message.Leave">You are about to leave an unsaved note. Are you sure you want to close ?</system:String>
     <system:String x:Key="Message.EmptyTitle">Impossible to create a note without a title. Please enter one</system:String>
     <system:String x:Key="Message.OkButton">OK</system:String>
     <system:String x:Key="Message.CancelButton">Cancel</system:String>
+    
+    <!-- MONTHS -->
+    <system:String x:Key="Month.January">Jan.</system:String>
+    <system:String x:Key="Month.February">Feb.</system:String>
+    <system:String x:Key="Month.March">Mar.</system:String>
+    <system:String x:Key="Month.April">Apr.</system:String>
+    <system:String x:Key="Month.May">May</system:String>
+    <system:String x:Key="Month.June">Jun.</system:String>
+    <system:String x:Key="Month.July">Jul.</system:String>
+    <system:String x:Key="Month.August">Aug.</system:String>
+    <system:String x:Key="Month.September">Sep.</system:String>
+    <system:String x:Key="Month.October">Oct.</system:String>
+    <system:String x:Key="Month.November">Nov.</system:String>
+    <system:String x:Key="Month.December">Dec.</system:String>
+    
     
 
 </ResourceDictionary>
