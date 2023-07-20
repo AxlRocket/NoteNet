@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" ResizeMode="NoResize"
         Title="Options" WindowStyle="None" Topmost="True"
-        AllowsTransparency="True" Background="Transparent">
+        AllowsTransparency="True" Background="Transparent" Loaded="Window_Loaded">
     <Border CornerRadius="10" 
             Background="{DynamicResource Background}" 
             BorderThickness="1" 
@@ -31,48 +31,79 @@
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0" Grid.Row="0" CornerRadius="5" Height="40" HorizontalAlignment="Left" Margin="6,0,0,0" Padding="0,0,0,0">
-                <Button Style="{DynamicResource Button}" 
-                        Height="40" BorderBrush="{x:Null}">
-                    <TextBlock Text="{DynamicResource AddNoteWindow.Save}"/>
+                <Button Style="{DynamicResource Button}" IsTabStop="False" 
+                        Height="40" BorderBrush="{x:Null}"
+                        x:Name="Close" Click="Close_Click">
+                    <TextBlock Text="{DynamicResource AddNoteWindow.Save}" Foreground="{DynamicResource ForegroundColor}"/>
                 </Button>
             </Border>
 
             <Border Grid.Column="2" Grid.Row="0" CornerRadius="5" Height="40" HorizontalAlignment="Right" Margin="0,0,6,0" Padding="0,0,0,0">
                 <Button Style="{DynamicResource Button}" 
-                        Height="40" BorderBrush="{x:Null}">
-                    <TextBlock Text="{DynamicResource AddNoteWindow.Cancel}"/>
+                        Height="40" IsTabStop="False"
+                        BorderBrush="{x:Null}"
+                        x:Name="Cancel" Click="Cancel_Click">
+                    <TextBlock Text="{DynamicResource AddNoteWindow.Cancel}" Foreground="{DynamicResource ForegroundColor}"/>
                 </Button>
             </Border>
 
             <DockPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
-                <TextBlock Text="Sélection de la langue" HorizontalAlignment="Left"/>
-                <ComboBox>
-                    <ComboBoxItem>Français</ComboBoxItem>
-                    <ComboBoxItem IsSelected="True">English</ComboBoxItem>
+                <TextBlock Text="Sélection de la langue" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundColor}"/>
+                <ComboBox VerticalContentAlignment="Center" 
+                          HorizontalAlignment="Right" 
+                          Width="Auto" IsTabStop="False"
+                          x:Name="LanguageSelection"
+                          SelectionChanged="LanguageSelection_SelectionChanged">
+                    <ComboBoxItem x:Name="en" IsTabStop="False">English</ComboBoxItem>
+                    <ComboBoxItem x:Name="fr" IsTabStop="False">Français</ComboBoxItem>
                 </ComboBox>
             </DockPanel>
 
             <DockPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
-                <TextBlock Text="Sélection du thème" HorizontalAlignment="Left"/>
-                <ComboBox>
-                    <ComboBoxItem>Clair</ComboBoxItem>
-                    <ComboBoxItem IsSelected="True">Sombre</ComboBoxItem>
+                <TextBlock Text="Sélection du thème" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundColor}"/>
+                <ComboBox VerticalContentAlignment="Center" 
+                          HorizontalAlignment="Right" 
+                          Width="Auto" IsTabStop="False"
+                          x:Name="ThemeSelection"
+                          SelectionChanged="ThemeSelection_SelectionChanged">
+                    <ComboBoxItem x:Name="light" IsTabStop="False">Clair</ComboBoxItem>
+                    <ComboBoxItem x:Name="dark" IsTabStop="False">Sombre</ComboBoxItem>
                 </ComboBox>
             </DockPanel>
 
             <DockPanel Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
-                <TextBlock Text="Activation de la bulle" HorizontalAlignment="Left"/>
-                <CheckBox Content="Activer" HorizontalAlignment="Right"/>
+                <TextBlock Text="Activation de la bulle" 
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource ForegroundColor}"/>
+                <CheckBox Content="Activer" Foreground="{DynamicResource ForegroundColor}"
+                          x:Name="BubbleCheck" IsTabStop="False"
+                          HorizontalAlignment="Right" 
+                          VerticalAlignment="Center" Checked="BubbleCheck_Checked" Unchecked="BubbleCheck_Unchecked"/>
             </DockPanel>
 
             <DockPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
-                <TextBlock Text="Lancement au démarrage du système" HorizontalAlignment="Left"/>
-                <CheckBox Content="Activer" HorizontalAlignment="Right"/>
+                <TextBlock Text="Lancement au démarrage du système" 
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource ForegroundColor}"/>
+                <CheckBox Content="Activer" Foreground="{DynamicResource ForegroundColor}"
+                          x:Name="StartCheck" IsTabStop="False"
+                          HorizontalAlignment="Right" 
+                          VerticalAlignment="Center" Checked="StartCheck_Checked" Unchecked="StartCheck_Unchecked"
+                          />
             </DockPanel>
 
             <DockPanel Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
-                <TextBlock Text="Dossier par défaut" HorizontalAlignment="Left"/>
-                <TextBlock Text="C:\\..." HorizontalAlignment="Right"/>
+                <TextBlock Text="Dossier par défaut" 
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource ForegroundColor}"/>
+                <TextBlock Text="C:\\..."
+                           HorizontalAlignment="Right" 
+                           VerticalAlignment="Center"
+                           x:Name="DefaultFolder"
+                           Foreground="{DynamicResource ForegroundColor}"/>
             </DockPanel>
 
         </Grid>

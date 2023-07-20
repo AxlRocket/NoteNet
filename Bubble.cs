@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NoteNet.Properties;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -60,7 +61,7 @@ namespace NoteNet
                 Height = 40,
                 Content = new Image
                 {
-                    Source = new BitmapImage(new Uri("pack://application:,,,/NoteNet;component/UI/Icons/Icon.png"))
+                    Source = (ImageSource)Application.Current.Resources["Icon" + Settings.Default.Theme]
                 },
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -76,7 +77,7 @@ namespace NoteNet
                 Height = 40,
                 Content = new Image
                 {
-                    Source = new BitmapImage(new Uri("pack://application:,,,/NoteNet;component/UI/Icons/Add.png"))
+                    Source = (ImageSource)Application.Current.Resources["Add" + Settings.Default.Theme]
                 },
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -112,12 +113,12 @@ namespace NoteNet
 
         private void Bubble_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Left = Left - 50;
+            Left -= 50;
         }
 
         private void Bubble_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Left = Left + 50;
+            Left += 50;
         }
 
         

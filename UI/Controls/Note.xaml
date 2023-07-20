@@ -10,6 +10,7 @@
         <Setter Property="Margin" Value="0,0,0,5"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="IsTabStop" Value="False"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -35,7 +36,7 @@
                                         Padding="0,1,0,5" 
                                         Background="{DynamicResource BackgroundNoteZone}">
                                 <local:BindableRichTextBox Margin="10,5,10,0" Foreground="{DynamicResource ForegroundColor}" IsReadOnly="True"
-                                    Document="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:Note}, Path=rtbTest}"
+                                    Document="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:Note}, Path=RTBContent}"
                                                            Background="Transparent" BorderThickness="0" Focusable="False" Cursor="Hand"/>
                             </Border>
                         </Grid>

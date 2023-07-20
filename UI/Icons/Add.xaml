@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DrawingImage x:Key="AddLight">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                <DrawingGroup Opacity="1" Transform="0.1,0,0,-0.1,0,512">
+                    <GeometryDrawing Brush="#1A1A1A" Geometry="F1 M512,512z M0,0z M2486,5105C2442,5090 2396,5049 2372,5005 2357,4978 2355,4876 2350,3875L2345,2775 1245,2770C20,2764 118,2770 52,2696 -16,2618 -16,2502 52,2424 118,2350 20,2356 1245,2350L2345,2345 2350,1245C2356,20 2350,118 2424,52 2502,-16 2618,-16 2696,52 2770,118 2764,20 2770,1245L2775,2345 3875,2350C5100,2356 5002,2350 5068,2424 5136,2502 5136,2618 5068,2696 5002,2770 5100,2764 3875,2770L2775,2775 2770,3875C2764,5100 2770,5002 2696,5068 2639,5118 2561,5132 2486,5105z" />
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="AddDark">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                <DrawingGroup Opacity="1" Transform="0.1,0,0,-0.1,0,512">
+                    <GeometryDrawing Brush="#E0E0E0" Geometry="F1 M512,512z M0,0z M2486,5105C2442,5090 2396,5049 2372,5005 2357,4978 2355,4876 2350,3875L2345,2775 1245,2770C20,2764 118,2770 52,2696 -16,2618 -16,2502 52,2424 118,2350 20,2356 1245,2350L2345,2345 2350,1245C2356,20 2350,118 2424,52 2502,-16 2618,-16 2696,52 2770,118 2764,20 2770,1245L2775,2345 3875,2350C5100,2356 5002,2350 5068,2424 5136,2502 5136,2618 5068,2696 5002,2770 5100,2764 3875,2770L2775,2775 2770,3875C2764,5100 2770,5002 2696,5068 2639,5118 2561,5132 2486,5105z" />
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+</ResourceDictionary>

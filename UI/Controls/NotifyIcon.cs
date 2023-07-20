@@ -1,7 +1,10 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
+using NoteNet.Properties;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media.Imaging;
 
 namespace NoteNet.UI.Controls
 {
@@ -9,7 +12,7 @@ namespace NoteNet.UI.Controls
     {
         public NotifyIcon()
         {
-            Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
+            IconSource = new BitmapImage(new Uri("pack://application:,,,/NoteNet;component/UI/Icons/Icon" + Settings.Default.Theme + ".ico"));
             ToolTipText = "NoteNet";
 
             DoubleClickCommand = new ShowNoteNet();

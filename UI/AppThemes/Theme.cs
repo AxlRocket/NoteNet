@@ -1,6 +1,8 @@
-﻿using System;
+﻿using NoteNet.Properties;
+using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace NoteNet.UI.AppThemes
 {
@@ -15,6 +17,21 @@ namespace NoteNet.UI.AppThemes
 
             Application.Current.Resources.MergedDictionaries.Add(ThemeFile);
             Application.Current.Resources.Remove(Application.Current.Resources.MergedDictionaries.OfType<ResourceDictionary>().Select(m => m).Where(j => j.Source.ToString().Contains("Theme")));
+
+            Application.Current.MainWindow.Icon = new BitmapImage(new Uri("pack://application:,,,/NoteNet;component/UI/Icons/Icon" + Settings.Default.Theme + ".ico"));
+        }
+
+        internal static void Replace_Theme(Uri ThemeFileUri)
+        {
+            ResourceDictionary ThemeFile = new ResourceDictionary
+            {
+                Source = ThemeFileUri
+            };
+
+            Application.Current.Resources.MergedDictionaries.Add(ThemeFile);
+            Application.Current.Resources.Remove(Application.Current.Resources.MergedDictionaries.OfType<ResourceDictionary>().Select(m => m).Where(j => j.Source.ToString().Contains("Theme")));
+
+            Application.Current.MainWindow.Icon = new BitmapImage(new Uri("pack://application:,,,/NoteNet;component/UI/Icons/Icon" + Settings.Default.Theme + ".ico"));
         }
     }
 }

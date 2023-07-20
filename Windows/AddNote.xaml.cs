@@ -39,6 +39,8 @@ namespace NoteNet.Windows
                 Title.FontStyle = FontStyles.Normal;
                 Title.Opacity = 1;
                 LoadNote(Path.Combine(Settings.Default.DefaultFolder, path + ".nte"));
+                TextRange tr = new TextRange(Content.Document.ContentStart, Content.Document.ContentEnd);
+                tr.ApplyPropertyValue(TextElement.ForegroundProperty, Application.Current.Resources["ForegroundColor"]);
             }
             else
             {
@@ -242,6 +244,18 @@ namespace NoteNet.Windows
                 e.Text == "_")
                 e.Handled = true;
             base.OnPreviewTextInput(e);
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S)
+            {
+                Add_Click(null, null);
+            }
+            else if (e.Key == Key.Escape)
+            {
+                Cancel_Click(null, null);
+            }
         }
     }
 }

@@ -16,5 +16,16 @@ namespace NoteNet.UI.Languages
             Application.Current.Resources.MergedDictionaries.Add(LangFile);
             Application.Current.Resources.Remove(Application.Current.Resources.MergedDictionaries.OfType<ResourceDictionary>().Select(m => m).Where(j => j.Source.ToString().Contains("Lang")));
         }
+
+        internal static void Replace_Lang(Uri LangFileUri)
+        {
+            ResourceDictionary LangFile = new ResourceDictionary
+            {
+                Source = LangFileUri
+            };
+
+            Application.Current.Resources.MergedDictionaries.Add(LangFile);
+            Application.Current.Resources.Remove(Application.Current.Resources.MergedDictionaries.OfType<ResourceDictionary>().Select(m => m).Where(j => j.Source.ToString().Contains("Lang")));
+        }
     }
 }

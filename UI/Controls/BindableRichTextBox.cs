@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows;
+using System.Windows.Media;
 
 namespace NoteNet.UI.Controls
 {
@@ -29,6 +30,9 @@ namespace NoteNet.UI.Controls
         {
             RichTextBox rtb = (RichTextBox)obj;
             rtb.Document = (FlowDocument)args.NewValue;
+
+            TextRange tr = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
+            tr.ApplyPropertyValue(TextElement.ForegroundProperty, Application.Current.Resources["ForegroundColor"]);
         }
     }
 }

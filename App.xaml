@@ -9,10 +9,14 @@
                 
                 <ResourceDictionary Source="/NoteNet;component/UI/AppThemes/LightTheme.xaml"/>
 
+                <ResourceDictionary Source="/NoteNet;component/UI/Icons/Add.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Icons/Arrow.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Icons/Icon.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Icons/Options.xaml"/>
 
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/Button.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Controls/CheckBox.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Controls/ComboBox.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/ContextMenu.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/MenuItem.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Controls/Note.xaml"/>

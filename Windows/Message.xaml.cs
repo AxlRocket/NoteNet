@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace NoteNet.Windows
 {
@@ -44,5 +45,16 @@ namespace NoteNet.Windows
             this.Close();
         }
 
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                OK_Click(null, null);
+            }
+            else if (e.Key == Key.Escape)
+            {
+                Cancel_Click(null, null); 
+            }
+        }
     }
 }

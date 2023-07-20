@@ -82,5 +82,17 @@ namespace NoteNet.Properties {
                 this["Showbubble"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AtStartup {
+            get {
+                return ((bool)(this["AtStartup"]));
+            }
+            set {
+                this["AtStartup"] = value;
+            }
+        }
     }
 }

@@ -40,4 +40,15 @@
     <SolidColorBrush x:Key="ToolTipBackground" Color="#2C2C2C"/>
     <SolidColorBrush x:Key="ToolTipBorder" Color="#1A1A1A"/>
 
+    <!-- COMBOBOX -->
+    <SolidColorBrush x:Key="CBBackground" Color="#373737"/>
+    <SolidColorBrush x:Key="CBBorder" Color="#3F3F3F"/>
+    <SolidColorBrush x:Key="CBHover" Color="#434343"/>
+    <SolidColorBrush x:Key="CBClick" Color="#383838"/>
+
+    <!-- COMBOBOX ITEM-->
+    <SolidColorBrush x:Key="CBIBackground" Color="#373737"/>
+    <SolidColorBrush x:Key="CBIHover" Color="#383838"/>
+    <SolidColorBrush x:Key="CBIClick" Color="#343434"/>
+
 </ResourceDictionary>

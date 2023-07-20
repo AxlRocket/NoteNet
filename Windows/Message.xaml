@@ -12,7 +12,7 @@
         ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner"
         MinWidth="200" MaxWidth="250" ResizeMode="NoResize"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight" KeyDown="Window_KeyDown">
     <Border Background="{DynamicResource Background}" CornerRadius="10" Margin="5,5,5,5">
         <Border.Effect>
             <DropShadowEffect Color="{DynamicResource Shadow}" BlurRadius="5" Direction="-90"
@@ -44,12 +44,13 @@
                             Grid.Column="0" HorizontalAlignment="Left"
                         FontSize="14" Width="80" Height="25" Content="{DynamicResource Message.OkButton}" 
                         Margin="20,0,0,0" Click="OK_Click"
-                        Grid.ColumnSpan="1" />
+                        Grid.ColumnSpan="1" IsTabStop="False"/>
 
                 <Button x:Name="Cancel" Style="{DynamicResource Button}" 
                             Grid.Column="1" HorizontalAlignment="Right"
                         FontSize="14" Width="80" Height="25" Content="{DynamicResource Message.CancelButton}" 
-                        Margin="0,0,20,0" Click="Cancel_Click" Visibility="Visible"/>
+                        Margin="0,0,20,0" Click="Cancel_Click" 
+                        Visibility="Visible" IsTabStop="False"/>
 
             </Grid>
 

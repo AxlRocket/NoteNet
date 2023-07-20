@@ -11,14 +11,6 @@ namespace NoteNet.UI.Controls
     {
         public Note()
         {
-            if (rtbTest != null)
-            {
-                Console.WriteLine("OK");
-            }
-            else
-            {
-                Console.WriteLine("null");
-            }
         }
 
         //TITLE
@@ -35,20 +27,6 @@ namespace NoteNet.UI.Controls
             set => SetValue(TitleProperty, value);
         }
 
-        // CONTENT
-
-        public static readonly DependencyProperty RTBProperty =
-        DependencyProperty.Register(
-        "RTB", typeof(string), typeof(Note),
-        new FrameworkPropertyMetadata(null,
-            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
-        public string RTB
-        {
-            get => (string)GetValue(RTBProperty);
-            set => SetValue(RTBProperty, value);
-        }
-
         // DATE
 
         public static readonly DependencyProperty DateProperty =
@@ -59,22 +37,22 @@ namespace NoteNet.UI.Controls
 
         public string Date
         {
-            get => (string)GetValue(RTBProperty);
-            set => SetValue(RTBProperty, value);
+            get => (string)GetValue(DateProperty);
+            set => SetValue(DateProperty, value);
         }
 
         // Test
 
-        public static readonly DependencyProperty rtbTestProperty =
+        public static readonly DependencyProperty RTBContentProperty =
         DependencyProperty.Register(
-        "rtbTest", typeof(FlowDocument), typeof(Note),
+        "RTBContent", typeof(FlowDocument), typeof(Note),
         new FrameworkPropertyMetadata(null,
             FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-        public FlowDocument rtbTest
+        public FlowDocument RTBContent
         {
-            get => (FlowDocument)GetValue(rtbTestProperty);
-            set => SetValue(rtbTestProperty, value);
+            get => (FlowDocument)GetValue(RTBContentProperty);
+            set => SetValue(RTBContentProperty, value);
         }
     }
 }
