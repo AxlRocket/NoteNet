@@ -22,6 +22,9 @@ namespace NoteNet
             Height = 50;
             MaxHeight = 50;
 
+            Icon = new BitmapImage(new Uri("pack://application:,,,/NoteNet;component/UI/Icons/Icon" + Settings.Default.Theme + ".ico"));
+            Title = (string)Application.Current.Resources["Bubble.Title"];
+
             double height = SystemParameters.PrimaryScreenHeight;
             double width = SystemParameters.PrimaryScreenWidth;
 
@@ -57,33 +60,39 @@ namespace NoteNet
 
             Button BtnShowApp = new Button
             {
-                Width = 38,
-                Height = 40,
+                Width = 42,
+                Height = 42,
                 Content = new Image
                 {
                     Source = (ImageSource)Application.Current.Resources["Icon" + Settings.Default.Theme]
                 },
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Style = (Style)Application.Current.Resources["Button"]
+                Style = (Style)Application.Current.Resources["Button"],
+                VerticalContentAlignment = VerticalAlignment.Center,
+                HorizontalContentAlignment = HorizontalAlignment.Center
             };
             BtnShowApp.Click += BtnShowApp_Click;
+            BtnShowApp.ToolTip = Application.Current.Resources["Bubble.ShowApp"];
 
             Grid.SetColumn(BtnShowApp, 0);
 
             Button BtnAddNote = new Button
             {
-                Width = 38,
-                Height = 40,
+                Width = 42,
+                Height = 42,
                 Content = new Image
                 {
                     Source = (ImageSource)Application.Current.Resources["Add" + Settings.Default.Theme]
                 },
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Style = (Style)Application.Current.Resources["Button"]
+                Style = (Style)Application.Current.Resources["Button"],
+                VerticalContentAlignment = VerticalAlignment.Center,
+                HorizontalContentAlignment = HorizontalAlignment.Center
             };
             BtnAddNote.Click += BtnAddNote_Click;
+            BtnAddNote.ToolTip = Application.Current.Resources["Bubble.AddNote"];
 
             Grid.SetColumn(BtnAddNote, 1);
 

@@ -1,17 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
 
 namespace NoteNet.UI.Controls
 {
     public class Note : Button
     {
-        public Note()
-        {
-        }
+        public Note() { }
 
         //TITLE
 
@@ -41,7 +36,7 @@ namespace NoteNet.UI.Controls
             set => SetValue(DateProperty, value);
         }
 
-        // Test
+        // RTBContent
 
         public static readonly DependencyProperty RTBContentProperty =
         DependencyProperty.Register(

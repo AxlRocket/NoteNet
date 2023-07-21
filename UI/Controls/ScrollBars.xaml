@@ -24,6 +24,7 @@
     </Style>
 
     <!--SCROLLBARS-->
+    
     <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="Foreground" Value="{DynamicResource ScrollBarColor}"/>

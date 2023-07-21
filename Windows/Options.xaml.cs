@@ -2,9 +2,10 @@
 using NoteNet.UI.AppThemes;
 using NoteNet.UI.Languages;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 
 namespace NoteNet.Windows
 {
@@ -28,6 +29,9 @@ namespace NoteNet.Windows
             Top = top + 25;
         }
 
+        private bool bubblePreviousState;
+        private string themePreviousState;
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             switch(Settings.Default.Language)
@@ -47,28 +51,43 @@ namespace NoteNet.Windows
             {
                 case "Light":
                     light.IsSelected = true;
+                    themePreviousState = "Light";
                     break;
                 case "Dark":
                     dark.IsSelected = true;
+                    themePreviousState = "Dark";
                     break;
                 default:
                     light.IsSelected = true;
+                    themePreviousState = "Light";
                     break;
             }
 
             if (Settings.Default.Showbubble)
+            {
                 BubbleCheck.IsChecked = true;
-
-            if (Settings.Default.AtStartup)
-                StartCheck.IsChecked = true;
+                bubblePreviousState = true;
+            }
+                
+            /*if (Settings.Default.AtStartup)
+                StartCheck.IsChecked = true;*/
 
             DefaultFolder.Text = Settings.Default.DefaultFolder;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            Settings.Default.Save();
-            Close();
+            if (Settings.Default.Showbubble != bubblePreviousState || Settings.Default.Theme != themePreviousState)
+            {
+                Settings.Default.Save();
+                Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                Settings.Default.Save();
+                Close();
+            }
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -130,7 +149,6 @@ namespace NoteNet.Windows
             }
 
             Theme.Replace_Theme(ThemeFileUri);
-            //Application.Current.MainWindow.Icon = new BitmapImage(new Uri("pack://application:,,,/NoteNet;component/UI/Icons/Icon" + Settings.Default.Theme + ".ico"));
         }
 
         private void BubbleCheck_Checked(object sender, RoutedEventArgs e)
@@ -151,6 +169,12 @@ namespace NoteNet.Windows
         private void StartCheck_Unchecked(object sender, RoutedEventArgs e)
         {
             Settings.Default.AtStartup = false;
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 }

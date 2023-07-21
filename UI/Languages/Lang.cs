@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NoteNet.Properties;
+using System;
 using System.Linq;
 using System.Windows;
 
@@ -10,7 +11,7 @@ namespace NoteNet.UI.Languages
         {
             ResourceDictionary LangFile = new ResourceDictionary
             {
-                Source = new Uri("/NoteNet;component/UI/Languages/Lang_" + Properties.Settings.Default.Language + ".xaml", UriKind.RelativeOrAbsolute)
+                Source = new Uri("/NoteNet;component/UI/Languages/Lang_" + Settings.Default.Language + ".xaml", UriKind.RelativeOrAbsolute)
             };
 
             Application.Current.Resources.MergedDictionaries.Add(LangFile);

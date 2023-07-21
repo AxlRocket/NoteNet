@@ -22,8 +22,10 @@
                 <RowDefinition MaxHeight="44" MinHeight="44" Height="44"/>
                 <RowDefinition MaxHeight="44" MinHeight="44" Height="44"/>
                 <RowDefinition MaxHeight="44" MinHeight="44" Height="44"/>
-                <RowDefinition MaxHeight="44" MinHeight="44" Height="44"/>
-                <RowDefinition MaxHeight="44" MinHeight="44" Height="44"/>
+                <!--<RowDefinition MaxHeight="44" MinHeight="44" Height="44"/>-->
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -48,7 +50,7 @@
             </Border>
 
             <DockPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
-                <TextBlock Text="Sélection de la langue" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundColor}"/>
+                <TextBlock Text="{DynamicResource Options.LanguageSelection}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundColor}"/>
                 <ComboBox VerticalContentAlignment="Center" 
                           HorizontalAlignment="Right" 
                           Width="Auto" IsTabStop="False"
@@ -60,7 +62,7 @@
             </DockPanel>
 
             <DockPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
-                <TextBlock Text="Sélection du thème" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundColor}"/>
+                <TextBlock Text="{DynamicResource Options.ThemeSelection}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundColor}"/>
                 <ComboBox VerticalContentAlignment="Center" 
                           HorizontalAlignment="Right" 
                           Width="Auto" IsTabStop="False"
@@ -72,30 +74,30 @@
             </DockPanel>
 
             <DockPanel Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
-                <TextBlock Text="Activation de la bulle" 
+                <TextBlock Text="{DynamicResource Options.Bubble}" 
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            Foreground="{DynamicResource ForegroundColor}"/>
-                <CheckBox Content="Activer" Foreground="{DynamicResource ForegroundColor}"
+                <CheckBox Content="{DynamicResource Options.Enable}" Foreground="{DynamicResource ForegroundColor}"
                           x:Name="BubbleCheck" IsTabStop="False"
                           HorizontalAlignment="Right" 
                           VerticalAlignment="Center" Checked="BubbleCheck_Checked" Unchecked="BubbleCheck_Unchecked"/>
             </DockPanel>
 
-            <DockPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
-                <TextBlock Text="Lancement au démarrage du système" 
+            <!--<DockPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
+                <TextBlock Text="{DynamicResource Options.LaunchOnStartup}" 
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            Foreground="{DynamicResource ForegroundColor}"/>
-                <CheckBox Content="Activer" Foreground="{DynamicResource ForegroundColor}"
+                <CheckBox Content="{DynamicResource Options.Enable}" Foreground="{DynamicResource ForegroundColor}"
                           x:Name="StartCheck" IsTabStop="False"
                           HorizontalAlignment="Right" 
                           VerticalAlignment="Center" Checked="StartCheck_Checked" Unchecked="StartCheck_Unchecked"
                           />
-            </DockPanel>
+            </DockPanel>-->
 
-            <DockPanel Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
-                <TextBlock Text="Dossier par défaut" 
+            <DockPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10" VerticalAlignment="Top">
+                <TextBlock Text="{DynamicResource Options.DefautFolder}" 
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            Foreground="{DynamicResource ForegroundColor}"/>
@@ -103,7 +105,30 @@
                            HorizontalAlignment="Right" 
                            VerticalAlignment="Center"
                            x:Name="DefaultFolder"
+                           MaxWidth="200"
+                           TextWrapping="WrapWithOverflow"
                            Foreground="{DynamicResource ForegroundColor}"/>
+            </DockPanel>
+
+            <DockPanel Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10" VerticalAlignment="Top">
+                <TextBlock Text="{DynamicResource Options.Thanks}" 
+                           HorizontalAlignment="Left"
+                           TextWrapping="WrapWithOverflow"
+                           VerticalAlignment="Bottom"
+                           Foreground="{DynamicResource ForegroundColor}"/>
+            </DockPanel>
+
+            <DockPanel Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="20,10,20,10">
+                <TextBlock Text="NoteNet - v1.0 - " 
+                           HorizontalAlignment="Left"
+                           TextWrapping="WrapWithOverflow"
+                           VerticalAlignment="Bottom"
+                           Foreground="{DynamicResource ForegroundColor}"/>
+                <TextBlock>           
+                    <Hyperlink NavigateUri="http://www.google.com" RequestNavigate="Hyperlink_RequestNavigate">
+                    </Hyperlink>
+                </TextBlock>
+
             </DockPanel>
 
         </Grid>

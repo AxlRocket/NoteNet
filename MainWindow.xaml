@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:local="clr-namespace:NoteNet.UI.Controls"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="NoteNet"
         x:Name="Main" WindowStyle="None" 
         WindowStartupLocation="Manual"
         AllowsTransparency="True"

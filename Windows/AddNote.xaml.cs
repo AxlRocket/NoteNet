@@ -16,40 +16,6 @@ namespace NoteNet.Windows
 
         private bool Modification;
 
-        public AddNote(Window parent, double width = 0, double height = 0, double left = 0, double top = 0, string path = "")
-        {
-            InitializeComponent();
-
-            Owner = parent;
-            Width = width;
-            MinWidth = width;
-            MaxWidth = width;
-            Height = height;
-            MinHeight = height;
-            MaxHeight = height;
-            Left = left + 25;
-            Top = top + 25;
-
-            if (path != "")
-            {
-                Modification = true;
-                CreationDate = path.Split('-')[0]; //
-                Created.Text = DateFormat(path.Split('-')[0]); //path.Split('-')[0].Remove(path.Split('-')[0].Count() - 4); // Donne juste la date
-                Title.Text = path.Split('-')[1]; // Donne le titre
-                Title.FontStyle = FontStyles.Normal;
-                Title.Opacity = 1;
-                LoadNote(Path.Combine(Settings.Default.DefaultFolder, path + ".nte"));
-                TextRange tr = new TextRange(Content.Document.ContentStart, Content.Document.ContentEnd);
-                tr.ApplyPropertyValue(TextElement.ForegroundProperty, Application.Current.Resources["ForegroundColor"]);
-            }
-            else
-            {
-                Modification = false;
-                CreationDate = DateTime.Now.ToString("ddMMyyyyhhmm");
-                Created.Text = DateTime.Now.ToString("dd MMM yyyy");
-            }
-        }
-
         public string FullName
         {
             get { return CreationDate + "-" + Title.Text + ".nte"; }
@@ -62,9 +28,9 @@ namespace NoteNet.Windows
 
         private string DateFormat(string date)
         {
-            string day = date[0].ToString() + date[1].ToString(), 
-                month = date[2].ToString() + date[3].ToString(), 
-                year = date[4].ToString() + date[5].ToString() + date[6].ToString() + date[7].ToString();
+            string day = date[6].ToString() + date[7].ToString(),
+                month = date[4].ToString() + date[5].ToString(),
+                year = date[0].ToString() + date[1].ToString() + date[2].ToString() + date[3].ToString();
 
             switch (month)
             {
@@ -112,6 +78,40 @@ namespace NoteNet.Windows
             return day + " " + month + " " + year;
         }
 
+        public AddNote(Window parent, double width = 0, double height = 0, double left = 0, double top = 0, string path = "")
+        {
+            InitializeComponent();
+
+            Owner = parent;
+            Width = width;
+            MinWidth = width;
+            MaxWidth = width;
+            Height = height;
+            MinHeight = height;
+            MaxHeight = height;
+            Left = left + 25;
+            Top = top + 25;
+
+            if (path != "")
+            {
+                Modification = true;
+                CreationDate = path.Split('-')[0];
+                Created.Text = DateFormat(path.Split('-')[0]); //Day note
+                Title.Text = path.Split('-')[1]; //Title note
+                Title.FontStyle = FontStyles.Normal;
+                Title.Opacity = 1;
+                LoadNote(Path.Combine(Settings.Default.DefaultFolder, path + ".nte"));
+                TextRange tr = new TextRange(Content.Document.ContentStart, Content.Document.ContentEnd);
+                tr.ApplyPropertyValue(TextElement.ForegroundProperty, Application.Current.Resources["ForegroundColor"]);
+            }
+            else
+            {
+                Modification = false;
+                CreationDate = DateTime.Now.ToString("yyyyMMddHHmm");
+                Created.Text = DateTime.Now.ToString("dd MMM yyyy");
+            }
+        }
+
         private bool ContentInRTB()
         {
             var start = Content.Document.ContentStart;
@@ -129,7 +129,7 @@ namespace NoteNet.Windows
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            if ((Title.Text != (string)Application.Current.Resources["AddNoteWindow.Title"] && Title.Text != "")
+            if ((Title.Text != (string)Application.Current.Resources["AddNoteWindow.Title"] && Title.Text.Trim() != "")
                 || ContentInRTB())
             {
                 //Ask user if he wants to leave
@@ -148,7 +148,7 @@ namespace NoteNet.Windows
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (Title.Text != (string)Application.Current.Resources["AddNoteWindow.Title"] && Title.Text != "" && Title.Text.Trim() != "")
+            if (Title.Text != (string)Application.Current.Resources["AddNoteWindow.Title"] && Title.Text.Trim() != "")
             {
                 string path = Path.Combine(Settings.Default.DefaultFolder, CreationDate + "-" + Title.Text + ".nte");
 

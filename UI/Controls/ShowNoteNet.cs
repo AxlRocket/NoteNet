@@ -10,7 +10,6 @@ namespace NoteNet.UI.Controls
         {
             Application.Current.MainWindow.Show();
             Application.Current.MainWindow.WindowState = WindowState.Normal;
-            Console.WriteLine("OK ?");
         }
 
         public bool CanExecute(object parameter)

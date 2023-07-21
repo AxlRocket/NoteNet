@@ -14,6 +14,7 @@
     <system:String x:Key="ContextMenu.Delete">Delete</system:String>
     <system:String x:Key="ContextMenu.Duplicate">Duplicate</system:String>
     <system:String x:Key="ContextMenu.Display">Display</system:String>
+    <system:String x:Key="ContextMenu.Restart">Restart NoteNet</system:String>
     <system:String x:Key="ContextMenu.Close">Close NoteNet</system:String>
 
     <!-- ADDNOTE WINDOW -->
@@ -48,6 +49,19 @@
     <system:String x:Key="Month.November">Nov.</system:String>
     <system:String x:Key="Month.December">Dec.</system:String>
     
-    
+    <!-- BUBBLE -->
+    <system:String x:Key="Bubble.Title">NoteNet bubble</system:String>
+    <system:String x:Key="Bubble.ShowApp">Display application</system:String>
+    <system:String x:Key="Bubble.AddNote">Quick note</system:String>
+
+    <!-- OPTIONS -->
+    <system:String x:Key="Options.LanguageSelection">Language selection</system:String>
+    <system:String x:Key="Options.ThemeSelection">Theme selection</system:String>
+    <system:String x:Key="Options.Bubble">Activate the bubble</system:String>
+    <system:String x:Key="Options.LaunchOnStartup">Launch on startup</system:String>
+    <system:String x:Key="Options.DefautFolder">Defaut folder</system:String>
+    <system:String x:Key="Options.Enable">Enable</system:String>
+    <system:String x:Key="Options.Thanks">Thanks to Freepik, Catalin Fertu, Rahul Kaklotar and Rasama studio for the options, reduce, add and application icons. Thanks also to Laurence Bunnage, BerndK and hardcodet for the TilePanel, the SVG to XAML converter and the system tray icon. All their links are available on the NoteNet website.</system:String>
+    <system:String x:Key="Options.WebSite">Web site</system:String>
 
 </ResourceDictionary>

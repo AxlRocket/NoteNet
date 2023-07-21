@@ -35,14 +35,14 @@ namespace NoteNet.Windows
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            this.Close();
+            DialogResult = true;
+            Close();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
-            this.Close();
+            DialogResult = false;
+            Close();
         }
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)

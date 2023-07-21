@@ -4,7 +4,6 @@ using NoteNet.UI.Controls;
 using NoteNet.UI.Languages;
 using NoteNet.Windows;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -21,11 +20,6 @@ namespace NoteNet
     public partial class MainWindow : Window
     {
         private readonly Bubble bubble;
-
-        public static void Tt()
-        {
-            Console.WriteLine("tt");
-        }
 
         public MainWindow()
         {
@@ -51,6 +45,8 @@ namespace NoteNet
             {
                 bubble?.Hide();
             }
+
+            Console.WriteLine("Changed");
                 
             base.OnStateChanged(e);
         }
@@ -115,6 +111,9 @@ namespace NoteNet
 
             ReduceImage.Source = (System.Windows.Media.ImageSource)Application.Current.Resources["RightArrow" + Settings.Default.Theme];
             OptionsImage.Source = (System.Windows.Media.ImageSource)Application.Current.Resources["OptionsImage" + Settings.Default.Theme];
+
+            WindowState = WindowState.Minimized;
+            Hide();
         }
 
         private void ButtonOptions_Click(object sender, RoutedEventArgs e)
@@ -182,10 +181,6 @@ namespace NoteNet
             {
                 Header = (string)Application.Current.Resources["ContextMenu.Delete"]
             };
-            MenuItem Dup = new MenuItem
-            {
-                Header = (string)Application.Current.Resources["ContextMenu.Duplicate"]
-            };
 
             Binding b = new Binding("Parent")
             {
@@ -198,12 +193,8 @@ namespace NoteNet
             Del.SetBinding(MenuItem.CommandParameterProperty, b);
             Del.Click += DeleteNote;
 
-            Dup.SetBinding(MenuItem.CommandParameterProperty, b);
-            Dup.Click += DuplicateNote;
-
             CM.Items.Add(Mod);
             CM.Items.Add(Del);
-            CM.Items.Add(Dup);
 
             return CM;
         }
@@ -229,14 +220,6 @@ namespace NoteNet
             NoteContainer.Children.Remove(CM.PlacementTarget as Note);
         }
 
-        private void DuplicateNote(object sender, RoutedEventArgs e)
-        {
-            MenuItem mnu = sender as MenuItem;
-            ContextMenu CM = mnu.Parent as ContextMenu;
-
-            Console.WriteLine("Dupliquer : " + (CM.PlacementTarget as Note).Title);
-        }
-
         public void NewNoteFromBubble(object sender, RoutedEventArgs e)
         {
             NewNote_Click(sender, e);
@@ -258,7 +241,7 @@ namespace NoteNet
 
         private void AddNoteToPanel(Note nte)
         {
-            NoteContainer.Children.Add(nte);
+            NoteContainer.Children.Insert(0, nte);
         }
 
         private void OpenNote(object sender, RoutedEventArgs e)

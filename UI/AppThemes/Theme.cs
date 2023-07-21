@@ -12,7 +12,7 @@ namespace NoteNet.UI.AppThemes
         {
             ResourceDictionary ThemeFile = new ResourceDictionary
             {
-                Source = new Uri("/NoteNet;component/UI/AppThemes/" + Properties.Settings.Default.Theme + "Theme.xaml", UriKind.RelativeOrAbsolute)
+                Source = new Uri("/NoteNet;component/UI/AppThemes/" + Settings.Default.Theme + "Theme.xaml", UriKind.RelativeOrAbsolute)
             };
 
             Application.Current.Resources.MergedDictionaries.Add(ThemeFile);

@@ -14,6 +14,7 @@
     <system:String x:Key="ContextMenu.Delete">Supprimer</system:String>
     <system:String x:Key="ContextMenu.Duplicate">Dupliquer</system:String>
     <system:String x:Key="ContextMenu.Display">Afficher</system:String>
+    <system:String x:Key="ContextMenu.Restart">Relancer NoteNet</system:String>
     <system:String x:Key="ContextMenu.Close">Fermer NoteNet</system:String>
 
     <!-- ADDNOTE WINDOW -->
@@ -47,6 +48,22 @@
     <system:String x:Key="Month.October">Oct.</system:String>
     <system:String x:Key="Month.November">Nov.</system:String>
     <system:String x:Key="Month.December">Déc.</system:String>
+
+    <!-- BUBBLE -->
+    <system:String x:Key="Bubble.Title">NoteNet bulle</system:String>
+    <system:String x:Key="Bubble.ShowApp">Afficher l'application</system:String>
+    <system:String x:Key="Bubble.AddNote">Note rapide</system:String>
+    
+    <!-- OPTIONS -->
+    <system:String x:Key="Options.LanguageSelection">Sélection de la langue</system:String>
+    <system:String x:Key="Options.ThemeSelection">Sélection du thème</system:String>
+    <system:String x:Key="Options.Bubble">Activer la bulle</system:String>
+    <system:String x:Key="Options.LaunchOnStartup">Lancement au démarrage</system:String>
+    <system:String x:Key="Options.DefautFolder">Dossier par défaut</system:String>
+    <system:String x:Key="Options.Enable">Activer</system:String>
+    <system:String x:Key="Options.Thanks">Remerciements aux graphistes Freepik, Catalin Fertu, Rahul Kaklotar et Rasama studio pour les icônes options, réduire, ajouter et l'icone d'application. Merci également à Laurence Bunnage, BerndK et hardcodet pour le TilePanel, le convertisseur SVG à XAML et l'icone de notification. Tous leur liens sont disponibles sur le site de NoteNet.</system:String>
+    <system:String x:Key="Options.WebSite">Site web</system:String>
+    
 
 
 </ResourceDictionary>
