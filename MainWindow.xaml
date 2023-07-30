@@ -33,11 +33,19 @@
                         <ColumnDefinition MaxWidth="44" Width="44" MinWidth="44"/>
                         <ColumnDefinition MaxWidth="44" Width="44" MinWidth="44"/>
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" CornerRadius="5" Height="40" HorizontalAlignment="Left" Margin="6,0,0,0" Padding="0,0,0,0">
-                        <Button Style="{DynamicResource Button}" Height="40" BorderBrush="{x:Null}" Click="NewNote_Click">
-                            <TextBlock Text="{DynamicResource MainWindow.AddNote}"/>
-                        </Button>
-                    </Border>
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center" Height="40" Orientation="Horizontal">
+                        <Border CornerRadius="5" Height="40" HorizontalAlignment="Left" Margin="6,0,0,0" Padding="0,0,0,0">
+                            <Button Style="{DynamicResource Button}" Height="40" BorderBrush="{x:Null}" Click="NewNote_Click">
+                                <TextBlock Text="{DynamicResource MainWindow.AddNote}"/>
+                            </Button>
+                        </Border>
+                        <Border CornerRadius="5" Height="40" HorizontalAlignment="Left" Margin="6,0,0,0" Padding="0,0,0,0">
+                            <Button Style="{DynamicResource Button}" Height="40" BorderBrush="{x:Null}" Click="NewList_Click">
+                                <TextBlock Text="{DynamicResource MainWindow.AddList}"/>
+                            </Button>
+                        </Border>
+                    </StackPanel>
+                    
                     <Border Grid.Column="1" CornerRadius="5" Height="40" HorizontalAlignment="Right" Margin="0,0,6,0">
                         <Button Style="{DynamicResource Button}" 
                                 Width="38" Height="40"

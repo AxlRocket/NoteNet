@@ -54,8 +54,8 @@
                      FontWeight="DemiBold"
                      SelectionBrush="{DynamicResource SelectionText}" 
                      CaretBrush="{DynamicResource ForegroundColor}"
-                     x:Name="Title" MaxLength="32" 
-                     GotFocus="Title_GotFocus" LostFocus="Title_LostFocus"
+                     x:Name="AddNoteTitle" MaxLength="32" 
+                     GotFocus="AddNoteTitle_GotFocus" LostFocus="AddNoteTitle_LostFocus"
                      Text="{DynamicResource AddNoteWindow.Title}" 
                      FontStyle="Italic" Opacity=".35" PreviewTextInput="Title_PreviewTextInput">
             </TextBox>
@@ -63,12 +63,17 @@
             <Border Grid.ColumnSpan="2" Grid.Row="2" Margin="6,6,6,0" Background="{DynamicResource Background}" CornerRadius="10" BorderBrush="{DynamicResource BorderAddNote}" BorderThickness="1">
                 <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
                     <RichTextBox BorderThickness="0" FontSize="14" 
-                             Padding="0,4,0,0" Background="Transparent"
+                             Padding="0,4,0,4" Background="Transparent"
                                  VerticalScrollBarVisibility="Auto"
                                  CaretBrush="{DynamicResource ForegroundColor}"
                                  SelectionBrush="{DynamicResource SelectionText}"
-                                 x:Name="Content"
-                                 Foreground="{DynamicResource ForegroundColor}">
+                                 x:Name="AddNoteContent" KeyDown="AddNoteContent_KeyDown"
+                                 Foreground="{DynamicResource ForegroundColor}" IsDocumentEnabled="True">
+                        <FlowDocument x:Name="ttt" Focusable="True">
+                            <BlockUIContainer>
+                                <StackPanel x:Name="SPContainer"/>
+                            </BlockUIContainer>
+                        </FlowDocument>
                     </RichTextBox>
                 </ScrollViewer>
             </Border>

@@ -19,7 +19,7 @@
                               RenderingBias="Quality" ShadowDepth="1" Opacity=".3"/>
         </Border.Effect>
         <StackPanel>
-            <TextBlock x:Name="Title"
+            <TextBlock x:Name="TitleNote"
                        FontSize="16"
                        Foreground="{DynamicResource ForegroundColor}"
                        Margin="20,20,20,15"/>

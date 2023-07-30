@@ -3,7 +3,8 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!-- MAIN WINDOW -->
-    <system:String x:Key="MainWindow.AddNote">Ajouter une note</system:String>
+    <system:String x:Key="MainWindow.AddNote">Nouvelle note</system:String>
+    <system:String x:Key="MainWindow.AddList">Nouvelle liste</system:String>
 
     <!-- MAIN WINDOW TOOLTIPS -->
     <system:String x:Key="MainWindow.Options">Options</system:String>
@@ -32,6 +33,7 @@
     <system:String x:Key="Message.AlreadyExists">Une note portant le même titre existe déjà. Voulez-vous la remplacer ?</system:String>
     <system:String x:Key="Message.Leave">Vous êtes sur le point de laisser une note non sauvegardée. Êtes-vous sûr de vouloir fermer ?</system:String>
     <system:String x:Key="Message.EmptyTitle">Impossible de créer une note sans titre. Veuillez en saisir un</system:String>
+    <system:String x:Key="Message.DeletedNote">La note a été supprimée ou n'existe plus</system:String>
     <system:String x:Key="Message.OkButton">OK</system:String>
     <system:String x:Key="Message.CancelButton">Annuler</system:String>
 
@@ -57,13 +59,13 @@
     <!-- OPTIONS -->
     <system:String x:Key="Options.LanguageSelection">Sélection de la langue</system:String>
     <system:String x:Key="Options.ThemeSelection">Sélection du thème</system:String>
+    <system:String x:Key="Options.Light">Clair</system:String>
+    <system:String x:Key="Options.Dark">Sombre</system:String>
     <system:String x:Key="Options.Bubble">Activer la bulle</system:String>
     <system:String x:Key="Options.LaunchOnStartup">Lancement au démarrage</system:String>
     <system:String x:Key="Options.DefautFolder">Dossier par défaut</system:String>
     <system:String x:Key="Options.Enable">Activer</system:String>
-    <system:String x:Key="Options.Thanks">Remerciements aux graphistes Freepik, Catalin Fertu, Rahul Kaklotar et Rasama studio pour les icônes options, réduire, ajouter et l'icone d'application. Merci également à Laurence Bunnage, BerndK et hardcodet pour le TilePanel, le convertisseur SVG à XAML et l'icone de notification. Tous leur liens sont disponibles sur le site de NoteNet.</system:String>
-    <system:String x:Key="Options.WebSite">Site web</system:String>
-    
+
 
 
 </ResourceDictionary>

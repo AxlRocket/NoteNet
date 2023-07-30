@@ -4,6 +4,7 @@
     
     <!-- MAIN WINDOW -->
     <system:String x:Key="MainWindow.AddNote">Add note</system:String>
+    <system:String x:Key="MainWindow.AddList">Add list</system:String>
 
     <!-- MAIN WINDOW TOOLTIPS -->
     <system:String x:Key="MainWindow.Options">Options</system:String>
@@ -32,6 +33,7 @@
     <system:String x:Key="Message.AlreadyExists">A note with the same title already exists. Would you like to overwrite it ?</system:String>
     <system:String x:Key="Message.Leave">You are about to leave an unsaved note. Are you sure you want to close ?</system:String>
     <system:String x:Key="Message.EmptyTitle">Impossible to create a note without a title. Please enter one</system:String>
+    <system:String x:Key="Message.DeletedNote">The note has been deleted or no longer exists</system:String>
     <system:String x:Key="Message.OkButton">OK</system:String>
     <system:String x:Key="Message.CancelButton">Cancel</system:String>
     
@@ -57,11 +59,11 @@
     <!-- OPTIONS -->
     <system:String x:Key="Options.LanguageSelection">Language selection</system:String>
     <system:String x:Key="Options.ThemeSelection">Theme selection</system:String>
+    <system:String x:Key="Options.Light">Light</system:String>
+    <system:String x:Key="Options.Dark">Dark</system:String>
     <system:String x:Key="Options.Bubble">Activate the bubble</system:String>
     <system:String x:Key="Options.LaunchOnStartup">Launch on startup</system:String>
     <system:String x:Key="Options.DefautFolder">Defaut folder</system:String>
     <system:String x:Key="Options.Enable">Enable</system:String>
-    <system:String x:Key="Options.Thanks">Thanks to Freepik, Catalin Fertu, Rahul Kaklotar and Rasama studio for the options, reduce, add and application icons. Thanks also to Laurence Bunnage, BerndK and hardcodet for the TilePanel, the SVG to XAML converter and the system tray icon. All their links are available on the NoteNet website.</system:String>
-    <system:String x:Key="Options.WebSite">Web site</system:String>
 
 </ResourceDictionary>

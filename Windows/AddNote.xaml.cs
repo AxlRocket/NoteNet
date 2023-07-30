@@ -1,9 +1,14 @@
 ﻿using NoteNet.Properties;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Timers;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
 
 namespace NoteNet.Windows
 {
@@ -16,14 +21,16 @@ namespace NoteNet.Windows
 
         private bool Modification;
 
+        private bool isList;
+
         public string FullName
         {
-            get { return CreationDate + "-" + Title.Text + ".nte"; }
+            get { return CreationDate + "-" + AddNoteTitle.Text + ".nte"; }
         }
 
         public string NewTitle
         {
-            get { return Title.Text; }
+            get { return AddNoteTitle.Text; }
         }
 
         private string DateFormat(string date)
@@ -78,9 +85,11 @@ namespace NoteNet.Windows
             return day + " " + month + " " + year;
         }
 
-        public AddNote(Window parent, double width = 0, double height = 0, double left = 0, double top = 0, string path = "")
+        public AddNote(Window parent, double width = 0, double height = 0, double left = 0, double top = 0, bool list = false, string path = "")
         {
             InitializeComponent();
+
+            isList = list;
 
             Owner = parent;
             Width = width;
@@ -92,30 +101,75 @@ namespace NoteNet.Windows
             Left = left + 25;
             Top = top + 25;
 
+            if (!isList)
+            {
+                AddNoteContent.Document = new FlowDocument();
+                AddNoteContent.AcceptsReturn = true;
+            }
+            else
+            {
+                AddNoteContent.AcceptsReturn = false;
+            }
+
             if (path != "")
             {
                 Modification = true;
                 CreationDate = path.Split('-')[0];
                 Created.Text = DateFormat(path.Split('-')[0]); //Day note
-                Title.Text = path.Split('-')[1]; //Title note
-                Title.FontStyle = FontStyles.Normal;
-                Title.Opacity = 1;
+                AddNoteTitle.Text = path.Split('-')[1]; //Title note
+                AddNoteTitle.FontStyle = FontStyles.Normal;
+                AddNoteTitle.Opacity = 1;
                 LoadNote(Path.Combine(Settings.Default.DefaultFolder, path + ".nte"));
-                TextRange tr = new TextRange(Content.Document.ContentStart, Content.Document.ContentEnd);
+                TextRange tr = new TextRange(AddNoteContent.Document.ContentStart, AddNoteContent.Document.ContentEnd);
                 tr.ApplyPropertyValue(TextElement.ForegroundProperty, Application.Current.Resources["ForegroundColor"]);
+                if (isList)
+                    AddNoteContent.AcceptsReturn = false;
             }
             else
             {
                 Modification = false;
                 CreationDate = DateTime.Now.ToString("yyyyMMddHHmm");
-                Created.Text = DateTime.Now.ToString("dd MMM yyyy");
+                Created.Text = DateFormat(DateTime.Now.ToString("yyyyMMdd"));
+            }
+
+            Console.WriteLine(isList);
+
+            if (isList)
+            {
+                Console.WriteLine("Let's go ?");
+
+                foreach (CheckBox CB in FindWindowChildren<CheckBox>((StackPanel)AddNoteContent.Document.FindName("SPContainer")))
+                {
+                    Console.WriteLine("How many ?");
+                    CB.Checked += new RoutedEventHandler((send, ee) => CB_Checked(send, ee, (DockPanel)CB.Parent));
+                    CB.Unchecked += new RoutedEventHandler((send, ee) => CB_Checked(send, ee, (DockPanel)CB.Parent));
+                }
+            }
+        }
+
+        public static IEnumerable<T> FindWindowChildren<T>(DependencyObject dObj) where T : DependencyObject
+        {
+            if (dObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(dObj); i++)
+                {
+                    DependencyObject ch = VisualTreeHelper.GetChild(dObj, i);
+                    if (ch != null && ch is T)
+                    {
+                        yield return (T)ch;
+                    }
+                    foreach (T nestedChild in FindWindowChildren<T>(ch))
+                    {
+                        yield return nestedChild;
+                    }
+                }
             }
         }
 
         private bool ContentInRTB()
         {
-            var start = Content.Document.ContentStart;
-            var end = Content.Document.ContentEnd;
+            var start = AddNoteContent.Document.ContentStart;
+            var end = AddNoteContent.Document.ContentEnd;
 
             if (start.GetOffsetToPosition(end) == 0 || start.GetOffsetToPosition(end) == 2)
             {
@@ -129,7 +183,7 @@ namespace NoteNet.Windows
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            if ((Title.Text != (string)Application.Current.Resources["AddNoteWindow.Title"] && Title.Text.Trim() != "")
+            if ((AddNoteTitle.Text != (string)Application.Current.Resources["AddNoteWindow.Title"] && AddNoteTitle.Text.Trim() != "")
                 || ContentInRTB())
             {
                 //Ask user if he wants to leave
@@ -148,9 +202,9 @@ namespace NoteNet.Windows
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (Title.Text != (string)Application.Current.Resources["AddNoteWindow.Title"] && Title.Text.Trim() != "")
+            if (AddNoteTitle.Text != (string)Application.Current.Resources["AddNoteWindow.Title"] && AddNoteTitle.Text.Trim() != "")
             {
-                string path = Path.Combine(Settings.Default.DefaultFolder, CreationDate + "-" + Title.Text + ".nte");
+                string path = Path.Combine(Settings.Default.DefaultFolder, CreationDate + "-" + AddNoteTitle.Text + ".nte");
 
                 if (File.Exists(path))
                 {
@@ -188,44 +242,57 @@ namespace NoteNet.Windows
 
         void SaveNote(string _fileName)
         {
-            TextRange TR;
+            /*TextRange TR;
             FileStream fStream;
-            TR = new TextRange(Content.Document.ContentStart, Content.Document.ContentEnd);
+            TR = new TextRange(AddNoteContent.Document.ContentStart, AddNoteContent.Document.ContentEnd);
             fStream = new FileStream(_fileName, FileMode.Create);
             TR.Save(fStream, DataFormats.XamlPackage);
-            fStream.Close();
+            fStream.Close();*/
+
+            FileStream xamlFile = new FileStream(_fileName, FileMode.Create, FileAccess.ReadWrite);
+            XamlWriter.Save(AddNoteContent.Document, xamlFile);
+            xamlFile.Close();
         }
 
         void LoadNote(string _fileName)
         {
-            TextRange TR;
+            /*TextRange TR;
             FileStream fStream;
             if (File.Exists(_fileName))
             {
-                TR = new TextRange(Content.Document.ContentStart, Content.Document.ContentEnd);
+                TR = new TextRange(AddNoteContent.Document.ContentStart, AddNoteContent.Document.ContentEnd);
                 fStream = new FileStream(_fileName, FileMode.OpenOrCreate);
                 TR.Load(fStream, DataFormats.XamlPackage);
                 fStream.Close();
+            }*/
+
+            if ((StackPanel)AddNoteContent.Document.FindName("SPContainer") != null)
+                isList = true;
+
+            FileStream nteFile = new FileStream(_fileName, FileMode.Open, FileAccess.Read);
+            FlowDocument FD = XamlReader.Load(nteFile) as FlowDocument;
+            AddNoteContent.Document = FD;
+
+            nteFile.Close();
+        }
+
+        private void AddNoteTitle_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (AddNoteTitle.Text == (string)Application.Current.Resources["AddNoteWindow.Title"])
+            {
+                AddNoteTitle.Text = "";
+                AddNoteTitle.FontStyle = FontStyles.Normal;
+                AddNoteTitle.Opacity = 1;
             }
         }
 
-        private void Title_GotFocus(object sender, RoutedEventArgs e)
+        private void AddNoteTitle_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (Title.Text == (string)Application.Current.Resources["AddNoteWindow.Title"])
+            if (AddNoteTitle.Text == "" || AddNoteTitle.Text.Trim() == "")
             {
-                Title.Text = "";
-                Title.FontStyle = FontStyles.Normal;
-                Title.Opacity = 1;
-            }
-        }
-
-        private void Title_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (Title.Text == "" || Title.Text.Trim() == "")
-            {
-                Title.Text = (string)Application.Current.Resources["AddNoteWindow.Title"];
-                Title.FontStyle = FontStyles.Italic;
-                Title.Opacity = .35;
+                AddNoteTitle.Text = (string)Application.Current.Resources["AddNoteWindow.Title"];
+                AddNoteTitle.FontStyle = FontStyles.Italic;
+                AddNoteTitle.Opacity = .35;
             }
         }
 
@@ -255,7 +322,70 @@ namespace NoteNet.Windows
             else if (e.Key == Key.Escape)
             {
                 Cancel_Click(null, null);
+            }                
+        }
+
+        private void AddNoteContent_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return && isList)
+            {
+                DockPanel SP = new DockPanel
+                {
+                    Margin = new Thickness(0,0,0,5)
+                };
+                CheckBox CB = new CheckBox
+                {
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Padding = new Thickness(2)
+                };
+                TextBox TB = new TextBox
+                {
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Focusable = true,
+                    AcceptsReturn = false,
+                    Background = Brushes.Transparent,
+                    BorderThickness = new Thickness(0),
+                    BorderBrush = Brushes.Transparent
+                };
+                TB.Loaded += TB_Loaded;
+                CB.Checked += new RoutedEventHandler((send, ee) => CB_Checked(send, ee, (DockPanel)CB.Parent));
+                CB.Unchecked += new RoutedEventHandler((send, ee) => CB_Checked(send, ee, (DockPanel)CB.Parent));
+
+                SP.Children.Add(CB);
+                SP.Children.Add(TB);
+
+                FlowDocument FD = AddNoteContent.Document;
+
+                StackPanel SPT = (StackPanel)FD.FindName("SPContainer");
+
+                SPT.Children.Add(SP);
             }
+        }
+
+        private void CB_Checked(object sender, RoutedEventArgs e, DockPanel DP)
+        {
+            CheckBox CB = sender as CheckBox;
+
+            if (CB.IsChecked == true)
+            {
+                TextBox TB = (TextBox)DP.Children[1];
+                TB.TextDecorations = TextDecorations.Strikethrough;
+            }
+            else
+            {
+                TextBox TB = (TextBox)DP.Children[1];
+                TB.TextDecorations = null;
+            }
+
+            TextBox TB1 = (TextBox)DP.Children[1];
+
+            Console.WriteLine(TB1.Text);
+        }
+
+        private void TB_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBox TB = sender as TextBox;
+            Keyboard.Focus(TB);
         }
     }
 }

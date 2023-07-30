@@ -3,7 +3,7 @@
 
     <Style TargetType="TextBox">
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">

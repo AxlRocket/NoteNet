@@ -25,7 +25,7 @@ namespace NoteNet.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("fr-FR")]
+        [global::System.Configuration.DefaultSettingValueAttribute("en-GB")]
         public string Language {
             get {
                 return ((string)(this["Language"]));

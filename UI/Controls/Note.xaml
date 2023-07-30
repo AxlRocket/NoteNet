@@ -11,6 +11,7 @@
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -26,18 +27,16 @@
 
                             <TextBlock Grid.Row="0" Margin="10,0,0,0" 
                                        VerticalAlignment="Center"
-                                       Foreground="{DynamicResource ForegroundColor}"
+                                       Foreground="{DynamicResource ForegroundColor}" FontSize="14" FontWeight="SemiBold"
                                        Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:Note}, Path=Title}"/>
-
-
 
                             <Border Grid.Row="1" 
                                         CornerRadius="0,0,10,10" 
                                         Padding="0,1,0,5" 
                                         Background="{DynamicResource BackgroundNoteZone}">
-                                <local:BindableRichTextBox Margin="10,5,10,0" Foreground="{DynamicResource ForegroundColor}" IsReadOnly="True"
+                                <local:BindableRichTextBox Margin="5,5,0,0" Foreground="{DynamicResource ForegroundColor}" IsReadOnly="True"
                                     Document="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:Note}, Path=RTBContent}"
-                                                           Background="Transparent" BorderThickness="0" Focusable="False" Cursor="Hand"/>
+                                    Background="Transparent" BorderThickness="0" Focusable="False" Cursor="Hand" MaxHeight="200" VerticalScrollBarVisibility="Auto"/>
                             </Border>
                         </Grid>
                     </Border>

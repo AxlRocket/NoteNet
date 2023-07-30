@@ -6,11 +6,13 @@ using NoteNet.Windows;
 using System;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 
 namespace NoteNet
 {
@@ -112,8 +114,8 @@ namespace NoteNet
             ReduceImage.Source = (System.Windows.Media.ImageSource)Application.Current.Resources["RightArrow" + Settings.Default.Theme];
             OptionsImage.Source = (System.Windows.Media.ImageSource)Application.Current.Resources["OptionsImage" + Settings.Default.Theme];
 
-            WindowState = WindowState.Minimized;
-            Hide();
+            /*WindowState = WindowState.Minimized;
+            Hide();*/
         }
 
         private void ButtonOptions_Click(object sender, RoutedEventArgs e)
@@ -134,7 +136,7 @@ namespace NoteNet
 
         private FlowDocument LoadNote(string _fileName)
         {
-            FlowDocument FD;
+            /*FlowDocument FD;
             TextRange tr;
             FileStream fStream;
             if (File.Exists(_fileName))
@@ -148,7 +150,18 @@ namespace NoteNet
                 return FD;
             }
 
+            return null;*/
+
+            if (File.Exists(_fileName))
+            {
+                FileStream nteFile = new FileStream(_fileName, FileMode.Open, FileAccess.Read);
+                FlowDocument FD = XamlReader.Load(nteFile) as FlowDocument;
+                nteFile.Close();
+                return FD;
+            }
+
             return null;
+            
         }
 
         private void CreateNote(string path)
@@ -161,7 +174,8 @@ namespace NoteNet
                 Margin = new Thickness(10, 0, 0, 10),
                 Title = NoteName.Remove(NoteName.Length - 4).Split('-')[1],
                 RTBContent = LoadNote(path),
-                Date = NoteName.Split('-')[0]
+                Date = NoteName.Split('-')[0],
+                IsTabStop = false
             };
 
             nte.Click += OpenNote;
@@ -227,7 +241,21 @@ namespace NoteNet
 
         private void NewNote_Click(object sender, RoutedEventArgs e)
         {
-            AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top)
+            AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, false)
+            {
+                ShowInTaskbar = false,
+                Owner = this
+            };
+
+            if (AddNte.ShowDialog() == true)
+            {
+                CreateNote(Path.Combine(Settings.Default.DefaultFolder, AddNte.FullName));
+            }
+        }
+
+        private void NewList_Click(object sender, RoutedEventArgs e)
+        {
+            AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, true)
             {
                 ShowInTaskbar = false,
                 Owner = this
@@ -249,16 +277,27 @@ namespace NoteNet
             Note nte = (Note)sender;
             Console.WriteLine(nte.Date);
 
-            AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, nte.Date + "-" + nte.Title)
+            if (File.Exists(Path.Combine(Settings.Default.DefaultFolder, nte.Date + "-" + nte.Title + ".nte")) || true)
             {
-                ShowInTaskbar = false,
-                Owner = this
-            };
+                AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, false, nte.Date + "-" + nte.Title)
+                {
+                    ShowInTaskbar = false,
+                    Owner = this
+                };
 
-            if (AddNte.ShowDialog() == true)
-            {
-                RefreshNote(nte, AddNte.NewTitle);
+                if (AddNte.ShowDialog() == true)
+                {
+                    RefreshNote(nte, AddNte.NewTitle);
+                }
             }
+            else
+            {
+                Message.Show(this, "DeletedNote", true);
+                
+                NoteContainer.Children.Remove(nte);
+            }
+
+
         }
 
         private void RefreshNote(Note nte, string newTitle)

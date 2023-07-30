@@ -4,6 +4,7 @@
     <Style TargetType="{x:Type MenuItem}">
         <Setter Property="Background" Value="{DynamicResource ContextMenuBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
 
         <Setter Property="Template">
             <Setter.Value>

@@ -18,7 +18,7 @@ namespace NoteNet.Windows
             Message msgBox = new Message();
             msgBox.Owner = parent;
 
-            msgBox.Title.Text = (string)Application.Current.Resources["Message." + title];
+            msgBox.TitleNote.Text = (string)Application.Current.Resources["Message." + title];
 
             msgBox.MessageText.Text = (string)Application.Current.Resources["Message." + message];
 

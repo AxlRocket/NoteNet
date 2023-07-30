@@ -6,6 +6,8 @@ namespace NoteNet.UI.Controls
 {
     public class BindableRichTextBox : RichTextBox
     {
+        public TextTrimming TextTrimming { get; set; }
+
         public static readonly DependencyProperty DocumentProperty =
             DependencyProperty.Register("Document", typeof(FlowDocument),
             typeof(BindableRichTextBox), new FrameworkPropertyMetadata

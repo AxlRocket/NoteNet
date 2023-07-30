@@ -50,15 +50,15 @@ namespace NoteNet.Windows
             switch(Settings.Default.Theme)
             {
                 case "Light":
-                    light.IsSelected = true;
+                    Light.IsSelected = true;
                     themePreviousState = "Light";
                     break;
                 case "Dark":
-                    dark.IsSelected = true;
+                    Dark.IsSelected = true;
                     themePreviousState = "Dark";
                     break;
                 default:
-                    light.IsSelected = true;
+                    Light.IsSelected = true;
                     themePreviousState = "Light";
                     break;
             }
@@ -75,7 +75,7 @@ namespace NoteNet.Windows
             DefaultFolder.Text = Settings.Default.DefaultFolder;
         }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
+        private void CloseOptions_Click(object sender, RoutedEventArgs e)
         {
             if (Settings.Default.Showbubble != bubblePreviousState || Settings.Default.Theme != themePreviousState)
             {
@@ -131,12 +131,12 @@ namespace NoteNet.Windows
 
             switch (ThemeComboBox.Name.ToString())
             {
-                case "light":
+                case "Light":
                     ThemeFileUri = new Uri("/NoteNet;component/UI/AppThemes/LightTheme.xaml",
                         UriKind.RelativeOrAbsolute);
                     Settings.Default.Theme = "Light";
                     break;
-                case "dark":
+                case "Dark":
                     ThemeFileUri = new Uri("/NoteNet;component/UI/AppThemes/DarkTheme.xaml",
                         UriKind.RelativeOrAbsolute);
                     Settings.Default.Theme = "Dark";

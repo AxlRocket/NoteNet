@@ -17,7 +17,8 @@
     <SolidColorBrush x:Key="BackgroundNoteTitle" Color="#DDDDDD"/>
 
     <!-- SCROLLBAR -->
-    <SolidColorBrush x:Key="ScrollBarColor" Color="#8A8A8A"/>
+    <SolidColorBrush x:Key="ScrollBarColor" Color="#448A8A8A"/>
+    <SolidColorBrush x:Key="ScrollBarsActive" Color="#8A8A8A"/>
 
     <!-- FOREGROUND -->
     <SolidColorBrush x:Key="ForegroundColor" Color="#1A1A1A"/>
