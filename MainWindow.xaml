@@ -11,7 +11,7 @@
         AllowsTransparency="True"
         Background="Transparent" Loaded="Main_Loaded"
         ShowInTaskbar="False" ResizeMode="NoResize"
-        Topmost="True">
+        Topmost="True" PreviewKeyDown="Main_PreviewKeyDown">
     <Border CornerRadius="10" Background="{DynamicResource Background}"
             BorderThickness="1" 
             BorderBrush="{DynamicResource BorderColor}"

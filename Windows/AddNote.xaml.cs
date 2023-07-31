@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -132,15 +131,17 @@ namespace NoteNet.Windows
                 Created.Text = DateFormat(DateTime.Now.ToString("yyyyMMdd"));
             }
 
-            Console.WriteLine(isList);
-
             if (isList)
             {
-                Console.WriteLine("Let's go ?");
+                AddNoteContent.CaretBrush = Brushes.Transparent;
+
+                if (((StackPanel)AddNoteContent.Document.FindName("SPContainer")).Children.Count == 0)
+                {
+                    AddListElement();
+                }
 
                 foreach (CheckBox CB in FindWindowChildren<CheckBox>((StackPanel)AddNoteContent.Document.FindName("SPContainer")))
                 {
-                    Console.WriteLine("How many ?");
                     CB.Checked += new RoutedEventHandler((send, ee) => CB_Checked(send, ee, (DockPanel)CB.Parent));
                     CB.Unchecked += new RoutedEventHandler((send, ee) => CB_Checked(send, ee, (DockPanel)CB.Parent));
                 }
@@ -242,13 +243,6 @@ namespace NoteNet.Windows
 
         void SaveNote(string _fileName)
         {
-            /*TextRange TR;
-            FileStream fStream;
-            TR = new TextRange(AddNoteContent.Document.ContentStart, AddNoteContent.Document.ContentEnd);
-            fStream = new FileStream(_fileName, FileMode.Create);
-            TR.Save(fStream, DataFormats.XamlPackage);
-            fStream.Close();*/
-
             FileStream xamlFile = new FileStream(_fileName, FileMode.Create, FileAccess.ReadWrite);
             XamlWriter.Save(AddNoteContent.Document, xamlFile);
             xamlFile.Close();
@@ -256,24 +250,14 @@ namespace NoteNet.Windows
 
         void LoadNote(string _fileName)
         {
-            /*TextRange TR;
-            FileStream fStream;
-            if (File.Exists(_fileName))
-            {
-                TR = new TextRange(AddNoteContent.Document.ContentStart, AddNoteContent.Document.ContentEnd);
-                fStream = new FileStream(_fileName, FileMode.OpenOrCreate);
-                TR.Load(fStream, DataFormats.XamlPackage);
-                fStream.Close();
-            }*/
-
-            if ((StackPanel)AddNoteContent.Document.FindName("SPContainer") != null)
-                isList = true;
-
             FileStream nteFile = new FileStream(_fileName, FileMode.Open, FileAccess.Read);
             FlowDocument FD = XamlReader.Load(nteFile) as FlowDocument;
             AddNoteContent.Document = FD;
 
             nteFile.Close();
+
+            if ((StackPanel)AddNoteContent.Document.FindName("SPContainer") != null)
+                isList = true;
         }
 
         private void AddNoteTitle_GotFocus(object sender, RoutedEventArgs e)
@@ -328,38 +312,44 @@ namespace NoteNet.Windows
         private void AddNoteContent_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return && isList)
-            {
-                DockPanel SP = new DockPanel
-                {
-                    Margin = new Thickness(0,0,0,5)
-                };
-                CheckBox CB = new CheckBox
-                {
-                    VerticalAlignment = VerticalAlignment.Center,
-                    Padding = new Thickness(2)
-                };
-                TextBox TB = new TextBox
-                {
-                    VerticalAlignment = VerticalAlignment.Center,
-                    Focusable = true,
-                    AcceptsReturn = false,
-                    Background = Brushes.Transparent,
-                    BorderThickness = new Thickness(0),
-                    BorderBrush = Brushes.Transparent
-                };
-                TB.Loaded += TB_Loaded;
-                CB.Checked += new RoutedEventHandler((send, ee) => CB_Checked(send, ee, (DockPanel)CB.Parent));
-                CB.Unchecked += new RoutedEventHandler((send, ee) => CB_Checked(send, ee, (DockPanel)CB.Parent));
-
-                SP.Children.Add(CB);
-                SP.Children.Add(TB);
-
-                FlowDocument FD = AddNoteContent.Document;
-
-                StackPanel SPT = (StackPanel)FD.FindName("SPContainer");
-
-                SPT.Children.Add(SP);
+            { 
+                AddListElement();
             }
+        }
+
+        private void AddListElement()
+        {
+            DockPanel SP = new DockPanel
+            {
+                Margin = new Thickness(0, 0, 0, 5)
+            };
+            CheckBox CB = new CheckBox
+            {
+                VerticalAlignment = VerticalAlignment.Center,
+                Padding = new Thickness(2)
+            };
+            TextBox TB = new TextBox
+            {
+                VerticalAlignment = VerticalAlignment.Center,
+                Focusable = true,
+                AcceptsReturn = false,
+                Background = Brushes.Transparent,
+                BorderThickness = new Thickness(0),
+                BorderBrush = Brushes.Transparent,
+                SelectionBrush = (Brush)Application.Current.Resources["SelectionText"],
+                TextWrapping = TextWrapping.WrapWithOverflow
+            };
+            TB.Loaded += TB_Loaded;
+            CB.Checked += new RoutedEventHandler((send, ee) => CB_Checked(send, ee, (DockPanel)CB.Parent));
+            CB.Unchecked += new RoutedEventHandler((send, ee) => CB_Checked(send, ee, (DockPanel)CB.Parent));
+
+            SP.Children.Add(CB);
+            SP.Children.Add(TB);
+
+            FlowDocument FD = AddNoteContent.Document;
+            StackPanel SPT = (StackPanel)FD.FindName("SPContainer");
+
+            SPT.Children.Add(SP);
         }
 
         private void CB_Checked(object sender, RoutedEventArgs e, DockPanel DP)
@@ -376,16 +366,77 @@ namespace NoteNet.Windows
                 TextBox TB = (TextBox)DP.Children[1];
                 TB.TextDecorations = null;
             }
-
-            TextBox TB1 = (TextBox)DP.Children[1];
-
-            Console.WriteLine(TB1.Text);
         }
 
         private void TB_Loaded(object sender, RoutedEventArgs e)
         {
             TextBox TB = sender as TextBox;
             Keyboard.Focus(TB);
+        }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back && isList)
+            {
+                if (Keyboard.FocusedElement.GetType() == typeof(TextBox))
+                {
+                    TextBox TB = (TextBox)Keyboard.FocusedElement;
+
+                    if (TB.Text.Length > 0)
+                    {
+                        e.Handled = false;
+                    }
+                    else if (TB.Text.Length < 1)
+                    {
+                        FlowDocument FD = AddNoteContent.Document;
+                        StackPanel SPT = (StackPanel)FD.FindName("SPContainer");
+
+                        if (SPT.Children.Count == 1)
+                        {
+                            e.Handled = true;
+                        }
+                        else
+                        {
+                            e.Handled = true;
+
+                            DockPanel SP = (DockPanel)TB.Parent;
+
+                            int index = SPT.Children.IndexOf(SP);
+
+                            SPT.Children.Remove(SP);
+
+                            Keyboard.Focus(((DockPanel)SPT.Children[index - 1]).Children[1]);
+                        }
+                    }
+                }
+                else if (Keyboard.FocusedElement.GetType() == typeof(RichTextBox))
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                }
+            }
+            else if (Keyboard.FocusedElement.GetType() == typeof(RichTextBox) && isList)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void AddNoteContent_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (isList)
+            {
+                FlowDocument FD = AddNoteContent.Document;
+                StackPanel SPT = (StackPanel)FD.FindName("SPContainer");
+
+                Keyboard.Focus(((DockPanel)SPT.Children[SPT.Children.Count - 1]).Children[1]);
+            }
         }
     }
 }

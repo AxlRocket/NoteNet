@@ -8,7 +8,7 @@
         Title="AddNote"
         WindowStyle="None" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         AllowsTransparency="True"
-        Background="Transparent" KeyDown="Window_KeyDown" IsTabStop="False">
+        Background="Transparent" KeyDown="Window_KeyDown" IsTabStop="False" PreviewKeyDown="Window_PreviewKeyDown">
     <Border CornerRadius="10" 
             Background="{DynamicResource Background}" 
             BorderThickness="1" 
@@ -68,7 +68,7 @@
                                  CaretBrush="{DynamicResource ForegroundColor}"
                                  SelectionBrush="{DynamicResource SelectionText}"
                                  x:Name="AddNoteContent" KeyDown="AddNoteContent_KeyDown"
-                                 Foreground="{DynamicResource ForegroundColor}" IsDocumentEnabled="True">
+                                 Foreground="{DynamicResource ForegroundColor}" IsDocumentEnabled="True" GotFocus="AddNoteContent_GotFocus">
                         <FlowDocument x:Name="ttt" Focusable="True">
                             <BlockUIContainer>
                                 <StackPanel x:Name="SPContainer"/>

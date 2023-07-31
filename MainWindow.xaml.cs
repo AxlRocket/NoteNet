@@ -47,8 +47,6 @@ namespace NoteNet
             {
                 bubble?.Hide();
             }
-
-            Console.WriteLine("Changed");
                 
             base.OnStateChanged(e);
         }
@@ -86,8 +84,6 @@ namespace NoteNet
 
             if (Settings.Default.FirstStart)
             {
-                Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-
                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "NoteNet Notes");
 
                 if (!Directory.Exists(path))
@@ -275,7 +271,6 @@ namespace NoteNet
         private void OpenNote(object sender, RoutedEventArgs e)
         {
             Note nte = (Note)sender;
-            Console.WriteLine(nte.Date);
 
             if (File.Exists(Path.Combine(Settings.Default.DefaultFolder, nte.Date + "-" + nte.Title + ".nte")) || true)
             {
@@ -317,6 +312,11 @@ namespace NoteNet
             {
                 e.Handled = true;
             }
+        }
+
+        private void Main_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
