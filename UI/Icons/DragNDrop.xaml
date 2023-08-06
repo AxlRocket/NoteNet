@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DrawingImage x:Key="DragNDrop">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                <DrawingGroup Opacity="1" Transform="0.1,0,0,-0.1,0,512">
+                    <GeometryDrawing Brush="{DynamicResource ForegroundColor}" Geometry="F1 M512,512z M0,0z M860,4215L860,3310 565,3310 270,3310 270,1655 270,0 2560,0 4850,0 4850,1365 4850,2730 4610,2730 4370,2730 4370,3775 4370,4820 4115,4820 3860,4820 3860,4970 3860,5120 2360,5120 860,5120 860,4215z M3550,3775L3550,2730 2902,2730 2253,2730 2012,3020 1770,3310 1465,3310 1160,3310 1160,4065 1160,4820 2355,4820 3550,4820 3550,3775z M4070,3625L4070,2730 3965,2730 3860,2730 3860,3625 3860,4520 3965,4520 4070,4520 4070,3625z M1868,2720L2110,2430 3330,2430 4550,2430 4550,1365 4550,300 2560,300 570,300 570,1655 570,3010 1098,3010 1627,3010 1868,2720z" />
+                    <GeometryDrawing Brush="{DynamicResource ForegroundColor}" Geometry="F1 M512,512z M0,0z M1660,4170L1660,4020 2355,4020 3050,4020 3050,4170 3050,4320 2355,4320 1660,4320 1660,4170z" />
+                    <GeometryDrawing Brush="{DynamicResource ForegroundColor}" Geometry="F1 M512,512z M0,0z M1660,3560L1660,3410 2355,3410 3050,3410 3050,3560 3050,3710 2355,3710 1660,3710 1660,3560z" />
+                    <GeometryDrawing Brush="{DynamicResource ForegroundColor}" Geometry="F1 M512,512z M0,0z M3330,1250L3330,1100 3785,1100 4240,1100 4240,1250 4240,1400 3785,1400 3330,1400 3330,1250z" />
+                    <GeometryDrawing Brush="{DynamicResource ForegroundColor}" Geometry="F1 M512,512z M0,0z M3330,745L3330,590 3783,592 4235,595 4238,748 4241,900 3785,900 3330,900 3330,745z" />
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+</ResourceDictionary>

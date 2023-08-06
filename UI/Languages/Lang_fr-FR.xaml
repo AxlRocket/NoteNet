@@ -5,6 +5,7 @@
     <!-- MAIN WINDOW -->
     <system:String x:Key="MainWindow.AddNote">Nouvelle note</system:String>
     <system:String x:Key="MainWindow.AddList">Nouvelle liste</system:String>
+    <system:String x:Key="MainWindow.DragNDrop">Ouvrir ici</system:String>
 
     <!-- MAIN WINDOW TOOLTIPS -->
     <system:String x:Key="MainWindow.Options">Options</system:String>
@@ -29,6 +30,8 @@
     <system:String x:Key="Message.Information">Information</system:String>
     <system:String x:Key="Message.Thanks">Merci</system:String>
     <system:String x:Key="Message.ThanksMessage">Merci d'avoir installé mon app. J'espère qu'elle vous plaira</system:String>
+    <system:String x:Key="Message.TooMuchFiles">L'application ne peut pas ouvrir plusieurs fichiers simultanément</system:String>
+    <system:String x:Key="Message.BadFile">Oups, il y a un problème avec ce fichier</system:String>
     <system:String x:Key="Message.SaveModification">Enregistrer les modifications ?</system:String>
     <system:String x:Key="Message.AlreadyExists">Une note portant le même titre existe déjà. Voulez-vous la remplacer ?</system:String>
     <system:String x:Key="Message.Leave">Vous êtes sur le point de laisser une note non sauvegardée. Êtes-vous sûr de vouloir fermer ?</system:String>

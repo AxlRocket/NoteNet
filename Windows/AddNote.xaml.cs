@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -112,15 +113,36 @@ namespace NoteNet.Windows
 
             if (path != "")
             {
-                Modification = true;
-                CreationDate = path.Split('-')[0];
-                Created.Text = DateFormat(path.Split('-')[0]); //Day note
-                AddNoteTitle.Text = path.Split('-')[1]; //Title note
-                AddNoteTitle.FontStyle = FontStyles.Normal;
-                AddNoteTitle.Opacity = 1;
-                LoadNote(Path.Combine(Settings.Default.DefaultFolder, path + ".nte"));
-                TextRange tr = new TextRange(AddNoteContent.Document.ContentStart, AddNoteContent.Document.ContentEnd);
-                tr.ApplyPropertyValue(TextElement.ForegroundProperty, Application.Current.Resources["ForegroundColor"]);
+                if (path.Contains(":\\"))
+                {
+                    string fullPath = path;
+
+                    string[] tempPath = path.Split('\\');
+                    path = tempPath[tempPath.Count() - 1].Replace(".nte", "");
+
+                    Modification = false;
+                    CreationDate = DateTime.Now.ToString("yyyyMMddHHmm");
+                    Created.Text = DateFormat(DateTime.Now.ToString("yyyyMMdd")); //Day note
+                    AddNoteTitle.Text = path; //Title note
+                    AddNoteTitle.FontStyle = FontStyles.Normal;
+                    AddNoteTitle.Opacity = 1;
+                    LoadNote(fullPath);
+                    TextRange tr = new TextRange(AddNoteContent.Document.ContentStart, AddNoteContent.Document.ContentEnd);
+                    tr.ApplyPropertyValue(TextElement.ForegroundProperty, Application.Current.Resources["ForegroundColor"]);
+                }
+                else
+                {
+                    Modification = true;
+                    CreationDate = path.Split('-')[0];
+                    Created.Text = DateFormat(path.Split('-')[0]); //Day note
+                    AddNoteTitle.Text = path.Split('-')[1]; //Title note
+                    AddNoteTitle.FontStyle = FontStyles.Normal;
+                    AddNoteTitle.Opacity = 1;
+                    LoadNote(Path.Combine(Settings.Default.DefaultFolder, path));
+                    TextRange tr = new TextRange(AddNoteContent.Document.ContentStart, AddNoteContent.Document.ContentEnd);
+                    tr.ApplyPropertyValue(TextElement.ForegroundProperty, Application.Current.Resources["ForegroundColor"]);
+                }
+
                 if (isList)
                     AddNoteContent.AcceptsReturn = false;
             }

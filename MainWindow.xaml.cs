@@ -132,22 +132,6 @@ namespace NoteNet
 
         private FlowDocument LoadNote(string _fileName)
         {
-            /*FlowDocument FD;
-            TextRange tr;
-            FileStream fStream;
-            if (File.Exists(_fileName))
-            {
-                FD = new FlowDocument();
-                tr = new TextRange(FD.ContentStart, FD.ContentEnd);
-                fStream = new FileStream(_fileName, FileMode.OpenOrCreate);
-                tr.Load(fStream, DataFormats.XamlPackage);
-                fStream.Close();
-                FD.Foreground = System.Windows.Media.Brushes.Red;
-                return FD;
-            }
-
-            return null;*/
-
             if (File.Exists(_fileName))
             {
                 FileStream nteFile = new FileStream(_fileName, FileMode.Open, FileAccess.Read);
@@ -157,7 +141,6 @@ namespace NoteNet
             }
 
             return null;
-            
         }
 
         private void CreateNote(string path)
@@ -317,6 +300,50 @@ namespace NoteNet
         private void Main_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void Main_Drop(object sender, DragEventArgs e)
+        {
+            BorderDragNDrop.Visibility = Visibility.Collapsed;
+            BorderNoteContainer.Visibility = Visibility.Visible;
+
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files.Count() > 1)
+            {
+                Message.Show(this, "TooMuchFiles", true, "Information");
+            }
+            else
+            {
+                if (files[0].Contains(".nte"))
+                {
+                    AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, false, files[0])
+                    {
+                        ShowInTaskbar = false,
+                        Owner = this
+                    };
+
+                    if (AddNte.ShowDialog() == true)
+                    {
+                        CreateNote(Path.Combine(Settings.Default.DefaultFolder, AddNte.FullName));
+                    }
+                }
+                else
+                {
+                    Message.Show(this, "BadFile", true, "Information");
+                }
+            }
+        }
+
+        private void Main_DragEnter(object sender, DragEventArgs e)
+        {
+            BorderNoteContainer.Visibility = Visibility.Collapsed;
+            BorderDragNDrop.Visibility = Visibility.Visible;
+        }
+
+        private void Main_DragLeave(object sender, DragEventArgs e)
+        {
+            BorderDragNDrop.Visibility = Visibility.Collapsed;
+            BorderNoteContainer.Visibility = Visibility.Visible;
         }
     }
 }

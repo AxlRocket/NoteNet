@@ -8,10 +8,11 @@
         Title="NoteNet"
         x:Name="Main" WindowStyle="None" 
         WindowStartupLocation="Manual"
-        AllowsTransparency="True"
+        AllowsTransparency="True" AllowDrop="True"
         Background="Transparent" Loaded="Main_Loaded"
         ShowInTaskbar="False" ResizeMode="NoResize"
-        Topmost="True" PreviewKeyDown="Main_PreviewKeyDown">
+        Topmost="True" PreviewKeyDown="Main_PreviewKeyDown" 
+        Drop="Main_Drop" DragEnter="Main_DragEnter" DragLeave="Main_DragLeave">
     <Border CornerRadius="10" Background="{DynamicResource Background}"
             BorderThickness="1" 
             BorderBrush="{DynamicResource BorderColor}"
@@ -68,8 +69,8 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="1" Background="{DynamicResource Background}" 
-                    CornerRadius="0,0,10,10" Margin="0,5,0,0">
+            <Border Grid.Row="1" Background="{DynamicResource Background}" Visibility="Visible"
+                    CornerRadius="0,0,10,10" Margin="0,5,0,0" x:Name="BorderNoteContainer">
                 <ScrollViewer VerticalScrollBarVisibility="Visible" 
                               HorizontalScrollBarVisibility="Disabled"
                               Margin="0,0,0,10" IsTabStop="False"
@@ -84,6 +85,14 @@
                     </local:TilePanel>
                 </ScrollViewer>
                 
+            </Border>
+
+            <Border Grid.Row="1" Background="{DynamicResource Background}" Visibility="Collapsed"
+                    CornerRadius="0,0,10,10" Margin="0,5,0,0" x:Name="BorderDragNDrop">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <Image Source="{StaticResource DragNDrop}" Width="75" Height="75" Margin="0,-100,0,50"/>
+                    <TextBlock Text="{DynamicResource MainWindow.DragNDrop}" HorizontalAlignment="Center" FontSize="16"/>
+                </StackPanel>
             </Border>
         </Grid>
     </Border>

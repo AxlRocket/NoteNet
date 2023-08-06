@@ -11,6 +11,7 @@
 
                 <ResourceDictionary Source="/NoteNet;component/UI/Icons/Add.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Icons/Arrow.xaml"/>
+                <ResourceDictionary Source="/NoteNet;component/UI/Icons/DragNDrop.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Icons/Icon.xaml"/>
                 <ResourceDictionary Source="/NoteNet;component/UI/Icons/Options.xaml"/>
 
