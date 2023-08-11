@@ -22,7 +22,7 @@
                 <RowDefinition MaxHeight="44" MinHeight="44" Height="44"/>
                 <RowDefinition MaxHeight="44" MinHeight="44" Height="44"/>
                 <RowDefinition MaxHeight="44" MinHeight="44" Height="44"/>
-                <!--<RowDefinition MaxHeight="44" MinHeight="44" Height="44"/>-->
+                <RowDefinition MaxHeight="44" MinHeight="44" Height="44"/>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -83,7 +83,7 @@
                           VerticalAlignment="Center" Checked="BubbleCheck_Checked" Unchecked="BubbleCheck_Unchecked"/>
             </DockPanel>
 
-            <!--<DockPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
+            <DockPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10">
                 <TextBlock Text="{DynamicResource Options.LaunchOnStartup}" 
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
@@ -93,9 +93,9 @@
                           HorizontalAlignment="Right" 
                           VerticalAlignment="Center" Checked="StartCheck_Checked" Unchecked="StartCheck_Unchecked"
                           />
-            </DockPanel>-->
+            </DockPanel>
 
-            <DockPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10" VerticalAlignment="Top">
+            <DockPanel Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="20,10,20,10" VerticalAlignment="Top">
                 <TextBlock Text="{DynamicResource Options.DefautFolder}" 
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
@@ -109,8 +109,8 @@
                            Foreground="{DynamicResource ForegroundColor}"/>
             </DockPanel>
 
-            <DockPanel Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="20,10,20,10">
-                <TextBlock Text="v1.0 - " 
+            <DockPanel Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="20,10,20,10">
+                <TextBlock Text="v1.1 - " 
                            HorizontalAlignment="Left"
                            TextWrapping="WrapWithOverflow"
                            VerticalAlignment="Bottom"

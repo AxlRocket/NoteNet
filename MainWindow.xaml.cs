@@ -58,6 +58,9 @@ namespace NoteNet
 
         private void Main_Loaded(object sender, RoutedEventArgs e)
         {
+            WindowState = WindowState.Minimized;
+            Hide();
+
             double height = SystemParameters.PrimaryScreenHeight;
             double width = SystemParameters.PrimaryScreenWidth;
 
@@ -109,9 +112,6 @@ namespace NoteNet
 
             ReduceImage.Source = (System.Windows.Media.ImageSource)Application.Current.Resources["RightArrow" + Settings.Default.Theme];
             OptionsImage.Source = (System.Windows.Media.ImageSource)Application.Current.Resources["OptionsImage" + Settings.Default.Theme];
-
-            /*WindowState = WindowState.Minimized;
-            Hide();*/
         }
 
         private void ButtonOptions_Click(object sender, RoutedEventArgs e)

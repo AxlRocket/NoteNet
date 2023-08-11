@@ -1,4 +1,5 @@
-﻿using NoteNet.Properties;
+﻿using Microsoft.Win32;
+using NoteNet.Properties;
 using NoteNet.UI.AppThemes;
 using NoteNet.UI.Languages;
 using System;
@@ -69,8 +70,8 @@ namespace NoteNet.Windows
                 bubblePreviousState = true;
             }
                 
-            /*if (Settings.Default.AtStartup)
-                StartCheck.IsChecked = true;*/
+            if (Settings.Default.AtStartup)
+                StartCheck.IsChecked = true;
 
             DefaultFolder.Text = Settings.Default.DefaultFolder;
         }
@@ -164,11 +165,21 @@ namespace NoteNet.Windows
         private void StartCheck_Checked(object sender, RoutedEventArgs e)
         {
             Settings.Default.AtStartup = true;
+
+            var path = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(path, true);
+
+            key.SetValue("NoteNetStartup", AppDomain.CurrentDomain.BaseDirectory + "NoteNet.exe");
         }
 
         private void StartCheck_Unchecked(object sender, RoutedEventArgs e)
         {
             Settings.Default.AtStartup = false;
+
+            var path = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(path, true);
+
+            key.DeleteValue("NoteNetStartup", false);
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

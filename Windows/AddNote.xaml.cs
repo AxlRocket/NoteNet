@@ -138,7 +138,7 @@ namespace NoteNet.Windows
                     AddNoteTitle.Text = path.Split('-')[1]; //Title note
                     AddNoteTitle.FontStyle = FontStyles.Normal;
                     AddNoteTitle.Opacity = 1;
-                    LoadNote(Path.Combine(Settings.Default.DefaultFolder, path));
+                    LoadNote(Path.Combine(Settings.Default.DefaultFolder, path + ".nte"));
                     TextRange tr = new TextRange(AddNoteContent.Document.ContentStart, AddNoteContent.Document.ContentEnd);
                     tr.ApplyPropertyValue(TextElement.ForegroundProperty, Application.Current.Resources["ForegroundColor"]);
                 }
