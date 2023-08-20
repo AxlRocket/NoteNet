@@ -110,13 +110,13 @@
             </DockPanel>
 
             <DockPanel Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="20,10,20,10">
-                <TextBlock Text="v1.1 - " 
+                <TextBlock Text="v1.2 - " 
                            HorizontalAlignment="Left"
                            TextWrapping="WrapWithOverflow"
                            VerticalAlignment="Bottom"
                            Foreground="{DynamicResource ForegroundColor}"/>
                 <TextBlock>           
-                    <Hyperlink NavigateUri="https://notenetapp.github.io/" RequestNavigate="Hyperlink_RequestNavigate">
+                    <Hyperlink NavigateUri="https://basicnetapp.github.io/" RequestNavigate="Hyperlink_RequestNavigate">
                         NoteNet
                     </Hyperlink>
                 </TextBlock>
