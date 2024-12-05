@@ -4,9 +4,9 @@ using NoteNet.UI.Controls;
 using NoteNet.UI.Languages;
 using NoteNet.Windows;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,7 +21,7 @@ namespace NoteNet
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Bubble bubble;
+        //private readonly Bubble bubble;
 
         public MainWindow()
         {
@@ -30,10 +30,13 @@ namespace NoteNet
             Lang.SetLanguage();
             Theme.SetTheme();
 
-            new NotifyIcon();
+            //new NotifyIcon();
 
-            if (Settings.Default.Showbubble)
-                bubble = new Bubble(this);
+            /*if (Settings.Default.Showbubble)
+                bubble = new Bubble();*/
+
+            Debug.WriteLine("Hello MainWindow");
+            Debug.WriteLine(this.Name);
         }
 
         protected override void OnStateChanged(EventArgs e)
@@ -41,11 +44,11 @@ namespace NoteNet
             if (WindowState == WindowState.Minimized)
             {
                 Hide();
-                bubble?.Show();
+                //bubble?.Show();
             }
             else
             {
-                bubble?.Hide();
+                //bubble?.Hide();
             }
                 
             base.OnStateChanged(e);
@@ -58,8 +61,8 @@ namespace NoteNet
 
         private void Main_Loaded(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Minimized;
-            Hide();
+            /*WindowState = WindowState.Minimized;
+            Hide();*/
 
             double height = SystemParameters.PrimaryScreenHeight;
             double width = SystemParameters.PrimaryScreenWidth;
@@ -127,7 +130,8 @@ namespace NoteNet
 
         private void ReduceApp_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Minimized;
+            this.DialogResult = true;
+            this.Close();
         }
 
         private FlowDocument LoadNote(string _fileName)

@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using NoteNet.Properties;
+using NoteNet.UI.Controls;
+using System.Threading;
 using System.Windows;
 
 namespace NoteNet
@@ -23,7 +25,12 @@ namespace NoteNet
                 Current.Shutdown();
             }
 
-            base.OnStartup(e);
+            new NotifyIcon();
+
+            if (Settings.Default.Showbubble)
+                new Bubble().Show();
+
+            //base.OnStartup(e);
         }
     }
 }

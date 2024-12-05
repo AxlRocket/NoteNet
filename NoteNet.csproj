@@ -120,6 +120,7 @@
     <Compile Include="Bubble.cs" />
     <Compile Include="UI\AppThemes\Theme.cs" />
     <Compile Include="UI\Controls\BindableRichTextBox.cs" />
+    <Compile Include="UI\Controls\CheckWindow.cs" />
     <Compile Include="UI\Controls\ListItemCheckBox.cs" />
     <Compile Include="UI\Controls\Note.cs" />
     <Compile Include="UI\Controls\NotifyIcon.cs" />

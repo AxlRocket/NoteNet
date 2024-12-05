@@ -22,10 +22,10 @@ namespace NoteNet.UI.Controls
             {
                 Header = (string)Application.Current.Resources["ContextMenu.Display"]
             }, 
-            Restart = new MenuItem
+            /*Restart = new MenuItem
             {
                 Header = (string)Application.Current.Resources["ContextMenu.Restart"]
-            },
+            },*/
             Close = new MenuItem
             {
                 Header = (string)Application.Current.Resources["ContextMenu.Close"]
@@ -39,33 +39,38 @@ namespace NoteNet.UI.Controls
             Open.SetBinding(MenuItem.CommandParameterProperty, b);
             Open.Click += OpenApp_Click;
 
-            Restart.SetBinding(MenuItem.CommandParameterProperty, b);
-            Restart.Click += RestartApp_Click;
+            /*Restart.SetBinding(MenuItem.CommandParameterProperty, b);
+            Restart.Click += RestartApp_Click;*/
 
             Close.SetBinding(MenuItem.CommandParameterProperty, b);
             Close.Click += CloseApp_Click;
 
             ContextMenu.Items.Add(Open);
-            ContextMenu.Items.Add(Restart);
+            //ContextMenu.Items.Add(Restart);
             ContextMenu.Items.Add(Close);
         }
 
         private void OpenApp_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Show();
-            Application.Current.MainWindow.WindowState = WindowState.Normal;
+            if (!CheckWindow.IsWindowOpen<Window>("Main"))
+            {
+                MainWindow MW = new MainWindow();
+                MW.Show();
+            }
+
+            /*Application.Current.MainWindow.Show();
+            Application.Current.MainWindow.WindowState = WindowState.Normal;*/
         }
 
-        private void RestartApp_Click(object sender, RoutedEventArgs e)
+        /*private void RestartApp_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
-        }
+        }*/
 
         private void CloseApp_Click(object sender, RoutedEventArgs e)
         {
             System.Environment.Exit(1);
-            
         }
     }
 }

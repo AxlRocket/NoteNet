@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Windows.Input;
 using System.Windows;
+using System.Windows.Input;
 
 namespace NoteNet.UI.Controls
 {
@@ -8,8 +8,11 @@ namespace NoteNet.UI.Controls
     {
         public void Execute(object parameter)
         {
-            Application.Current.MainWindow.Show();
-            Application.Current.MainWindow.WindowState = WindowState.Normal;
+            if (!CheckWindow.IsWindowOpen<Window>("Main"))
+            {
+                MainWindow MW = new MainWindow();
+                MW.Show();
+            }
         }
 
         public bool CanExecute(object parameter)

@@ -1,20 +1,23 @@
 ﻿using NoteNet.Properties;
+using NoteNet.UI.Controls;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
 namespace NoteNet
 {
     internal class Bubble : Window
     {
-        private readonly MainWindow MainWindow;
+        private int baseLeft = 0; //Position de base de la bulle
+        private int bubbleOpenedLeft = 0; //Position "ouverte" de la bulle
+        private int bubbleHideLeft = 0; //Position cachée de la bulle
+        private bool playInitialAnimation = true;
 
-        public Bubble(MainWindow MV)
+        public Bubble()
         {
-            MainWindow = MV;
-
             MinWidth = 100;
             Width = 100;
             MaxWidth = 100;
@@ -36,6 +39,10 @@ namespace NoteNet
 
             Left = width  - widthDiff - Width + 50;
             Top = height - heightDiff - 100;
+
+            baseLeft = (int)Left;
+            bubbleOpenedLeft = (int)Left - 50;
+            bubbleHideLeft = (int)Left + 50;
 
             ShowInTaskbar = false;
             WindowStyle = WindowStyle.None;
@@ -109,27 +116,74 @@ namespace NoteNet
 
         private void BtnShowApp_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Show();
-            Application.Current.MainWindow.WindowState = WindowState.Normal;
+            if (!CheckWindow.IsWindowOpen<Window>("Main"))
+            {
+                playInitialAnimation = false;
+                MainWindow MW = new MainWindow();
+                HideAnimation();
+
+                if ((bool)MW.ShowDialog())
+                {
+                    playInitialAnimation = true;
+                    InitialAnimation();
+                }
+            }
         }
 
         private void BtnAddNote_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Show();
-            Application.Current.MainWindow.WindowState = WindowState.Normal;
-            MainWindow.NewNoteFromBubble(sender, e);
+            if (!CheckWindow.IsWindowOpen<Window>("Main"))
+            {
+                playInitialAnimation = false;
+                MainWindow MW = new MainWindow();
+                HideAnimation();
+
+                bool MVDialogResult = (bool)MW.ShowDialog();
+                MW.NewNoteFromBubble(sender, e);
+
+                if (MVDialogResult)
+                {
+                    playInitialAnimation = true;
+                    InitialAnimation();
+                }
+            }
         }
 
         private void Bubble_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Left -= 50;
+            OpenAnimation();
+            //Left -= 50;
         }
 
         private void Bubble_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Left += 50;
+            if (playInitialAnimation)
+                InitialAnimation();
+            //Left += 50;
         }
 
-        
+        private void OpenAnimation()
+        {
+            DoubleAnimation MouseEnterAnimation = new DoubleAnimation(bubbleOpenedLeft, new Duration(TimeSpan.FromSeconds(0.25)))
+            {
+                AccelerationRatio = 0.75
+            };
+            this.BeginAnimation(LeftProperty, MouseEnterAnimation);
+        }
+
+        private void InitialAnimation()
+        {
+            DoubleAnimation MouseLeaveAnimation = new DoubleAnimation(baseLeft, new Duration(TimeSpan.FromSeconds(0.2)));
+            this.BeginAnimation(LeftProperty, MouseLeaveAnimation);
+        }
+
+        private void HideAnimation()
+        {
+            DoubleAnimation MouseEnterAnimation = new DoubleAnimation(bubbleHideLeft, new Duration(TimeSpan.FromSeconds(0.2)))
+            {
+                AccelerationRatio = 1
+            };
+            this.BeginAnimation(LeftProperty, MouseEnterAnimation);
+        }
     }
 }
