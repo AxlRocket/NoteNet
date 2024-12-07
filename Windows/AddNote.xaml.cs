@@ -9,12 +9,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace NoteNet.Windows
 {
-    /// <summary>
-    /// Logique d'interaction pour AddNote.xaml
-    /// </summary>
     public partial class AddNote : Window
     {
         private string CreationDate;
@@ -85,21 +83,19 @@ namespace NoteNet.Windows
             return day + " " + month + " " + year;
         }
 
-        public AddNote(Window parent, double width = 0, double height = 0, double left = 0, double top = 0, bool list = false, string path = "")
+        public AddNote(Window parent, bool list = false, string path = "")
         {
             InitializeComponent();
 
             isList = list;
 
+            Opacity = 0;
+
             Owner = parent;
-            Width = width;
-            MinWidth = width;
-            MaxWidth = width;
-            Height = height;
-            MinHeight = height;
-            MaxHeight = height;
-            Left = left + 25;
-            Top = top + 25;
+            Width = MinWidth = MaxWidth = parent.Width - 50;
+            Height = MinHeight = MaxHeight = parent.Height - 50;
+            Left = parent.Left + 25;
+            Top = parent.Top + 25;
 
             if (!isList)
             {
@@ -168,6 +164,14 @@ namespace NoteNet.Windows
                     CB.Unchecked += new RoutedEventHandler((send, ee) => CB_Checked(send, ee, (DockPanel)CB.Parent));
                 }
             }
+
+            DoubleAnimation DA = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(0.2)
+            };
+            BeginAnimation(OpacityProperty, DA);
         }
 
         public static IEnumerable<T> FindWindowChildren<T>(DependencyObject dObj) where T : DependencyObject
@@ -203,7 +207,6 @@ namespace NoteNet.Windows
             }
         }
 
-
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             if ((AddNoteTitle.Text != (string)Application.Current.Resources["AddNoteWindow.Title"] && AddNoteTitle.Text.Trim() != "")
@@ -212,15 +215,31 @@ namespace NoteNet.Windows
                 //Ask user if he wants to leave
                 if (Message.Show(this, "Leave"))
                 {
-                    DialogResult = false;
-                    Close();
+                    //DialogResult = false;
+                    CloseAnimation(false);
                 }
             } 
             else
             {
-                DialogResult = false;
-                Close();
+                //DialogResult = false;
+                CloseAnimation(false);
             }
+        }
+
+        private void CloseAnimation(bool Result)
+        {
+            DoubleAnimation DA = new DoubleAnimation()
+            {
+                From = 1,
+                To = 0,
+                Duration = TimeSpan.FromSeconds(0.1)
+            };
+            DA.Completed += (s, e) =>
+            {
+                DialogResult = Result;
+                Close();
+            };
+            BeginAnimation(OpacityProperty, DA);
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -236,8 +255,8 @@ namespace NoteNet.Windows
                         if (Message.Show(this, "SaveModification", false, "Information"))
                         {
                             SaveNote(path);
-                            DialogResult = true;
-                            Close();
+                            //DialogResult = true;
+                            CloseAnimation(true);
                         }
                     }
                     else
@@ -245,16 +264,16 @@ namespace NoteNet.Windows
                         if (Message.Show(this, "AlreadyExists", false))
                         {
                             SaveNote(path);
-                            DialogResult = true;
-                            Close();
+                            //DialogResult = true;
+                            CloseAnimation(true);
                         }
                     }
                 }
                 else
                 {
                     SaveNote(path);
-                    DialogResult = true;
-                    Close();
+                    //DialogResult = true;
+                    CloseAnimation(true);
                 }                
             }
             else

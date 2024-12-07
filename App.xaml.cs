@@ -1,5 +1,4 @@
 ﻿using NoteNet.Properties;
-using NoteNet.UI.Controls;
 using System.Threading;
 using System.Windows;
 

@@ -18,7 +18,7 @@ namespace NoteNet.UI.AppThemes
             Application.Current.Resources.MergedDictionaries.Add(ThemeFile);
             Application.Current.Resources.Remove(Application.Current.Resources.MergedDictionaries.OfType<ResourceDictionary>().Select(m => m).Where(j => j.Source.ToString().Contains("Theme")));
 
-            Application.Current.MainWindow.Icon = new BitmapImage(new Uri("pack://application:,,,/NoteNet;component/UI/Icons/Icon" + Settings.Default.Theme + ".ico"));
+            //Application.Current.MainWindow.Icon = new BitmapImage(new Uri("pack://application:,,,/NoteNet;component/UI/Icons/Icon" + Settings.Default.Theme + ".ico"));
         }
 
         internal static void Replace_Theme(Uri ThemeFileUri)

@@ -6,28 +6,32 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 
 namespace NoteNet.Windows
 {
-    /// <summary>
-    /// Logique d'interaction pour Options.xaml
-    /// </summary>
     public partial class Options : Window
     {
-        public Options(Window parent, double width = 0, double height = 0, double left = 0, double top = 0)
+        public Options(Window parent)
         {
             InitializeComponent();
 
+            Opacity = 0;
+
             Owner = parent;
-            Width = width;
-            MinWidth = width;
-            MaxWidth = width;
-            Height = height;
-            MinHeight = height;
-            MaxHeight = height;
-            Left = left + 25;
-            Top = top + 25;
+            Width = MinWidth = MaxWidth = parent.Width - 50;
+            Height = MinHeight = MaxHeight = parent.Height - 50;
+            Left = parent.Left + 25;
+            Top = parent.Top + 25;
+
+            DoubleAnimation opacityAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(0.2)
+            };
+            BeginAnimation(OpacityProperty, opacityAnimation);
         }
 
         private bool bubblePreviousState;
@@ -87,13 +91,30 @@ namespace NoteNet.Windows
             else
             {
                 Settings.Default.Save();
-                Close();
+                CloseAnimation();
             }
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            CloseAnimation();
+        }
+
+        private void CloseAnimation()
+        {
+            DoubleAnimation DA = new DoubleAnimation
+            {
+                From = 1,
+                To = 0,
+                Duration = TimeSpan.FromSeconds(0.1)
+            };
+
+            DA.Completed += (s, e) =>
+            {
+                Close();
+            };
+
+            BeginAnimation(OpacityProperty, DA);
         }
 
         private void LanguageSelection_SelectionChanged(object sender, RoutedEventArgs e)

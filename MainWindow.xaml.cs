@@ -1,10 +1,7 @@
 ﻿using NoteNet.Properties;
-using NoteNet.UI.AppThemes;
 using NoteNet.UI.Controls;
-using NoteNet.UI.Languages;
 using NoteNet.Windows;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -13,56 +10,15 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
+using System.Windows.Media.Animation;
 
 namespace NoteNet
 {
-    /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        //private readonly Bubble bubble;
-
-        public MainWindow()
+        public MainWindow(bool addNoteFromBubble = false)
         {
             InitializeComponent();
-
-            Lang.SetLanguage();
-            Theme.SetTheme();
-
-            //new NotifyIcon();
-
-            /*if (Settings.Default.Showbubble)
-                bubble = new Bubble();*/
-
-            Debug.WriteLine("Hello MainWindow");
-            Debug.WriteLine(this.Name);
-        }
-
-        protected override void OnStateChanged(EventArgs e)
-        {
-            if (WindowState == WindowState.Minimized)
-            {
-                Hide();
-                //bubble?.Show();
-            }
-            else
-            {
-                //bubble?.Hide();
-            }
-                
-            base.OnStateChanged(e);
-        }
-
-        public bool IsDirectoryEmpty(string path)
-        {
-            return !Directory.EnumerateFileSystemEntries(path).Any();
-        }
-
-        private void Main_Loaded(object sender, RoutedEventArgs e)
-        {
-            /*WindowState = WindowState.Minimized;
-            Hide();*/
 
             double height = SystemParameters.PrimaryScreenHeight;
             double width = SystemParameters.PrimaryScreenWidth;
@@ -78,15 +34,23 @@ namespace NoteNet
 
             int offset = 20;
 
-            Left = width - (width * widthRatio) - widthDiff - offset;
-            Top = height - (height * heightRatio) - heightDiff - offset;
-
             MaxWidth = width * widthRatio + offset;
             MinWidth = width * widthRatio + offset;
             Width = width * widthRatio + offset;
             MaxHeight = height * heightRatio + offset;
             MinHeight = height * heightRatio + offset;
             Height = height * heightRatio + offset;
+
+            //Left = width - (width * widthRatio) - widthDiff - offset; 
+            Left = width + Width + offset; //Initial position - Closed
+            openLeftMainWindow = width - (width * widthRatio) - widthDiff - offset; //Open position
+            closeLeftMainWindow = width + Width + offset; //Close position
+            Top = height - (height * heightRatio) - heightDiff - offset;
+
+            LocationChanged += new EventHandler(Window_LocationChanged);
+
+            ReduceImage.Source = (System.Windows.Media.ImageSource)Application.Current.Resources["RightArrow" + Settings.Default.Theme];
+            OptionsImage.Source = (System.Windows.Media.ImageSource)Application.Current.Resources["OptionsImage" + Settings.Default.Theme];
 
             if (Settings.Default.FirstStart)
             {
@@ -101,9 +65,38 @@ namespace NoteNet
                 Settings.Default.FirstStart = false;
                 Settings.Default.Save();
 
-                Message.Show(this, "ThanksMessage", false, "Thanks");
+                //Message.Show(this, "ThanksMessage", false, "Thanks");
             }
 
+            if (addNoteFromBubble)
+            {
+                this.Loaded += (s, e) =>
+                {
+                    NewNote_Click(s, e);
+                };
+            }
+
+            OpenAnimation();
+        }
+
+        private void Window_LocationChanged(object sender, EventArgs e)
+        {
+            foreach (Window win in this.OwnedWindows)
+            {
+                win.Top = this.Top + 25;
+                win.Left = this.Left + 25;
+            }
+        }
+
+        public bool IsDirectoryEmpty(string path)
+        {
+            return !Directory.EnumerateFileSystemEntries(path).Any();
+        }
+
+        private double closeLeftMainWindow = 0;
+        private double openLeftMainWindow = 0;
+        private void Main_Loaded(object sender, RoutedEventArgs e)
+        {
             if (!IsDirectoryEmpty(Settings.Default.DefaultFolder))
             {
                 DirectoryInfo DI = new DirectoryInfo(Settings.Default.DefaultFolder);
@@ -112,14 +105,11 @@ namespace NoteNet
                     CreateNote(file.FullName);
                 }
             }
-
-            ReduceImage.Source = (System.Windows.Media.ImageSource)Application.Current.Resources["RightArrow" + Settings.Default.Theme];
-            OptionsImage.Source = (System.Windows.Media.ImageSource)Application.Current.Resources["OptionsImage" + Settings.Default.Theme];
         }
 
         private void ButtonOptions_Click(object sender, RoutedEventArgs e)
         {
-            Options opt = new Options(this, this.Width - 50, this.Height - 50, this.Left, this.Top)
+            Options opt = new Options(this)
             {
                 ShowInTaskbar = false,
                 Owner = this
@@ -130,8 +120,18 @@ namespace NoteNet
 
         private void ReduceApp_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            this.Close();
+            DoubleAnimation CloseDA = new DoubleAnimation(closeLeftMainWindow, new Duration(TimeSpan.FromSeconds(0.3)))
+            {
+                AccelerationRatio = 0.8
+            };
+
+            CloseDA.Completed += (s, ev) =>
+            {
+                this.DialogResult = true;
+                this.Close();
+            };
+
+            this.BeginAnimation(LeftProperty, CloseDA);
         }
 
         private FlowDocument LoadNote(string _fileName)
@@ -217,14 +217,9 @@ namespace NoteNet
             NoteContainer.Children.Remove(CM.PlacementTarget as Note);
         }
 
-        public void NewNoteFromBubble(object sender, RoutedEventArgs e)
-        {
-            NewNote_Click(sender, e);
-        }
-
         private void NewNote_Click(object sender, RoutedEventArgs e)
         {
-            AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, false)
+            AddNote AddNte = new AddNote(this, false)
             {
                 ShowInTaskbar = false,
                 Owner = this
@@ -238,7 +233,7 @@ namespace NoteNet
 
         private void NewList_Click(object sender, RoutedEventArgs e)
         {
-            AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, true)
+            AddNote AddNte = new AddNote(this, true)
             {
                 ShowInTaskbar = false,
                 Owner = this
@@ -261,7 +256,7 @@ namespace NoteNet
 
             if (File.Exists(Path.Combine(Settings.Default.DefaultFolder, nte.Date + "-" + nte.Title + ".nte")) || true)
             {
-                AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, false, nte.Date + "-" + nte.Title)
+                AddNote AddNte = new AddNote(this, false, nte.Date + "-" + nte.Title)
                 {
                     ShowInTaskbar = false,
                     Owner = this
@@ -320,7 +315,7 @@ namespace NoteNet
             {
                 if (files[0].Contains(".nte"))
                 {
-                    AddNote AddNte = new AddNote(this, this.Width - 50, this.Height - 50, this.Left, this.Top, false, files[0])
+                    AddNote AddNte = new AddNote(this, false, files[0])
                     {
                         ShowInTaskbar = false,
                         Owner = this
@@ -348,6 +343,16 @@ namespace NoteNet
         {
             BorderDragNDrop.Visibility = Visibility.Collapsed;
             BorderNoteContainer.Visibility = Visibility.Visible;
+        }
+
+        private void OpenAnimation()
+        {
+            Opacity = 1;
+            DoubleAnimation OpenDA = new DoubleAnimation(openLeftMainWindow, new Duration(TimeSpan.FromSeconds(0.25)))
+            {
+                AccelerationRatio = 0.75
+            };
+            this.BeginAnimation(LeftProperty, OpenDA);
         }
     }
 }

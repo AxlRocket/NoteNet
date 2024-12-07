@@ -11,19 +11,15 @@ namespace NoteNet
 {
     internal class Bubble : Window
     {
-        private int baseLeft = 0; //Position de base de la bulle
-        private int bubbleOpenedLeft = 0; //Position "ouverte" de la bulle
-        private int bubbleHideLeft = 0; //Position cachée de la bulle
+        private int baseLeft = 0; //Initial position
+        private int bubbleOpenedLeft = 0; //Open position
+        private int bubbleHideLeft = 0; //Hidden position
         private bool playInitialAnimation = true;
 
         public Bubble()
         {
-            MinWidth = 100;
-            Width = 100;
-            MaxWidth = 100;
-            MinHeight = 50;
-            Height = 50;
-            MaxHeight = 50;
+            Width = MinWidth = MaxWidth = 100;
+            Height = MinHeight = MaxHeight = 50;
 
             Icon = new BitmapImage(new Uri("pack://application:,,,/NoteNet;component/UI/Icons/Icon" + Settings.Default.Theme + ".ico"));
             Title = (string)Application.Current.Resources["Bubble.Title"];
@@ -135,11 +131,10 @@ namespace NoteNet
             if (!CheckWindow.IsWindowOpen<Window>("Main"))
             {
                 playInitialAnimation = false;
-                MainWindow MW = new MainWindow();
+                MainWindow MW = new MainWindow(true);
                 HideAnimation();
 
                 bool MVDialogResult = (bool)MW.ShowDialog();
-                MW.NewNoteFromBubble(sender, e);
 
                 if (MVDialogResult)
                 {

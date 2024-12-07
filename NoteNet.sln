@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteNet", "NoteNet.csproj", "{71C861BF-A2E7-458A-9820-423DD4316B9F}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NoteNetSetup", "..\NoteNetSetup\NoteNetSetup.vdproj", "{0CCB0694-C525-4777-8DE6-9A1B53A10E46}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NoteNetSetup_x64", "..\NoteNetSetup\NoteNetSetup.vdproj", "{F9252C53-8C94-4798-9303-D0A49B5A753F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NoteNetSetup_x86", "..\NoteNetSetup_x86\NoteNetSetup_x86.vdproj", "{FA41D3B1-6D3A-4CDA-B46D-E13683718331}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,16 +31,20 @@ Global
 		{71C861BF-A2E7-458A-9820-423DD4316B9F}.Release|x64.Build.0 = Release|x64
 		{71C861BF-A2E7-458A-9820-423DD4316B9F}.Release|x86.ActiveCfg = Release|x64
 		{71C861BF-A2E7-458A-9820-423DD4316B9F}.Release|x86.Build.0 = Release|x64
-		{0CCB0694-C525-4777-8DE6-9A1B53A10E46}.Debug|Any CPU.ActiveCfg = Debug
-		{0CCB0694-C525-4777-8DE6-9A1B53A10E46}.Debug|x64.ActiveCfg = Debug
-		{0CCB0694-C525-4777-8DE6-9A1B53A10E46}.Debug|x64.Build.0 = Debug
-		{0CCB0694-C525-4777-8DE6-9A1B53A10E46}.Debug|x86.ActiveCfg = Debug
-		{0CCB0694-C525-4777-8DE6-9A1B53A10E46}.Debug|x86.Build.0 = Debug
-		{0CCB0694-C525-4777-8DE6-9A1B53A10E46}.Release|Any CPU.ActiveCfg = Release
-		{0CCB0694-C525-4777-8DE6-9A1B53A10E46}.Release|x64.ActiveCfg = Release
-		{0CCB0694-C525-4777-8DE6-9A1B53A10E46}.Release|x64.Build.0 = Release
-		{0CCB0694-C525-4777-8DE6-9A1B53A10E46}.Release|x86.ActiveCfg = Release
-		{0CCB0694-C525-4777-8DE6-9A1B53A10E46}.Release|x86.Build.0 = Release
+		{F9252C53-8C94-4798-9303-D0A49B5A753F}.Debug|Any CPU.ActiveCfg = Debug
+		{F9252C53-8C94-4798-9303-D0A49B5A753F}.Debug|x64.ActiveCfg = Debug
+		{F9252C53-8C94-4798-9303-D0A49B5A753F}.Debug|x86.ActiveCfg = Debug
+		{F9252C53-8C94-4798-9303-D0A49B5A753F}.Release|Any CPU.ActiveCfg = Release
+		{F9252C53-8C94-4798-9303-D0A49B5A753F}.Release|x64.ActiveCfg = Release
+		{F9252C53-8C94-4798-9303-D0A49B5A753F}.Release|x86.ActiveCfg = Release
+		{F9252C53-8C94-4798-9303-D0A49B5A753F}.Release|x86.Build.0 = Release
+		{FA41D3B1-6D3A-4CDA-B46D-E13683718331}.Debug|Any CPU.ActiveCfg = Debug
+		{FA41D3B1-6D3A-4CDA-B46D-E13683718331}.Debug|x64.ActiveCfg = Debug
+		{FA41D3B1-6D3A-4CDA-B46D-E13683718331}.Debug|x86.ActiveCfg = Debug
+		{FA41D3B1-6D3A-4CDA-B46D-E13683718331}.Release|Any CPU.ActiveCfg = Release
+		{FA41D3B1-6D3A-4CDA-B46D-E13683718331}.Release|x64.ActiveCfg = Release
+		{FA41D3B1-6D3A-4CDA-B46D-E13683718331}.Release|x86.ActiveCfg = Release
+		{FA41D3B1-6D3A-4CDA-B46D-E13683718331}.Release|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
