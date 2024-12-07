@@ -6,7 +6,7 @@ Write down your ideas, to-do lists or favorite movies.
 
 ## Bubble
 Quickly access or create your notes using the bubble at the bottom of your screen.  
-<sub>White bubble</sub>  
+<sub>Light bubble</sub>  
 ![LightBubbleClose](https://github.com/AxlRocket/NoteNet/blob/main/NoteNetGithubRes/LightBubbleClose.png) ![LightBubbleOpen](https://github.com/AxlRocket/NoteNet/blob/main/NoteNetGithubRes/LightBubbleOpen.png)  
 <sub>Dark bubble</sub>  
 ![DarkBubbleClose](https://github.com/AxlRocket/NoteNet/blob/main/NoteNetGithubRes/DarkBubbleClose.png) ![DarkBubbleOpen](https://github.com/AxlRocket/NoteNet/blob/main/NoteNetGithubRes/DarkBubbleOpen.png)  
