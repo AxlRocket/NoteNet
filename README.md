@@ -14,7 +14,7 @@ Quickly access or create your notes using the bubble at the bottom of your scree
 And even if you don't want to use the bubble, an icon is available in the notification area.
 
 ## Theme
-For now, there are only two themes available for natural integration into Windows
+For now, there are only two themes available for full integration into Windows 11
 
 ## Languages
 Only English and French are available.  
