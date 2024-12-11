@@ -13,8 +13,8 @@
     <SolidColorBrush x:Key="BackgroundButtonNote" Color="#DDDDDD"/>
     <SolidColorBrush x:Key="BackgroundButtonNoteHover" Color="#F2F2F2"/>
     <SolidColorBrush x:Key="BackgroundButtonNoteClick" Color="#F9F9F9"/>
-    <SolidColorBrush x:Key="BackgroundNoteZone" Color="#F2F2F2"/>
-    <SolidColorBrush x:Key="BackgroundNoteTitle" Color="#DDDDDD"/>
+    <SolidColorBrush x:Key="BackgroundNoteZone" Color="#F3F3F3"/>
+    <SolidColorBrush x:Key="BackgroundNoteTitle" Color="#DFDFDF"/>
 
     <!-- SCROLLBAR -->
     <SolidColorBrush x:Key="ScrollBarColor" Color="#448A8A8A"/>
